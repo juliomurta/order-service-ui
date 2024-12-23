@@ -5,7 +5,6 @@ import { EmployeesComponent } from '../employees/employees.component';
 import { OrdersComponent } from '../orders/orders.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
 import { CustomersComponent } from '../customers/customers.component';
 
 
