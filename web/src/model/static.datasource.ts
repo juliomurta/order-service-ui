@@ -86,4 +86,19 @@ export class StaticDataSource {
     getEmployees(): Observable<Employee[]> {
         return from([this.employees]);
     }
+
+    saveCustomer(customer: Customer): Observable<Customer> {
+        console.log(JSON.stringify(customer));
+        return from([customer]);
+    }
+
+    saveEmployee(employee: Employee): Observable<Employee> {
+        console.log(JSON.stringify(employee));
+        return from([employee]);
+    }
+
+    saveOrder(order: Order): Observable<Order> {
+        console.log(JSON.stringify(order));
+        return from([order]);
+    }
 }

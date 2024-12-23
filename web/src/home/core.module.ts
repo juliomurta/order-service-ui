@@ -10,6 +10,9 @@ import { StaticDataSource } from '../model/static.datasource';
 import { CustomerRepository } from '../model/customer.repository';
 import { EmployeeRepository } from '../model/employee.repository';
 import { OrderRepository } from '../model/order.repository';
+import { CustomerFormComponent } from '../customer-form/customer-form.component';
+import { EmployeeFormComponent } from '../employee-form/employee-form.component';
+import { OrderFormComponent } from '../order-form/order-form.component';
 
 
 
@@ -28,8 +31,11 @@ import { OrderRepository } from '../model/order.repository';
   declarations: [
     HomeComponent,
     CustomersComponent,
+    CustomerFormComponent,
     EmployeesComponent,
-    OrdersComponent
+    EmployeeFormComponent,
+    OrdersComponent,
+    OrderFormComponent
   ]
 })
 export class CoreModule { }

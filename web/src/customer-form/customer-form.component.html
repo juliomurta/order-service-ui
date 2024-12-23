@@ -1,34 +1,49 @@
 <div class="columns">
     <div class="column is-three-quarters">
         <h1 class="title">Customers</h1>
-        <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-            <input class="input" type="text" />
+        <form novalidate #form="ngForm" (ngSubmit)="save(form)">
+            <div class="field">
+                <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" 
+                           type="text" 
+                           #name="ngModel" 
+                           name="name" 
+                           [(ngModel)]="customer.name" />
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label class="label">Document Number</label>
-            <div class="control">
-            <input class="input" type="text" />
+            <div class="field">
+                <label class="label">Document Number</label>
+                <div class="control">
+                    <input class="input" 
+                           type="text" 
+                           #documentNumber="ngModel"
+                           name="documentNumber"
+                           [(ngModel)]="customer.documentNumber"/>
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left has-icons-right">
-            <input class="input" type="email" />
-            <span class="icon is-small is-left">
-                <i class="fas fa-envelope"></i>
-            </span>
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input" 
+                           type="email" 
+                           #email="ngModel" 
+                           name="email" 
+                           [(ngModel)]="customer.email" />
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
             </div>
-        </div>
-        <div class="field is-grouped">
-            <div class="control">
-            <button class="button is-link">Submit</button>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link" type="submit">Submit</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light" 
+                            routerLink="/customer">Cancel</button>
+                </div>
             </div>
-            <div class="control">
-            <button class="button is-link is-light">Cancel</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
