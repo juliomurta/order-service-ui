@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { OrderRepository } from '../model/order.repository';
+import { Order } from '../model/order.model';
 
 @Component({
   selector: 'app-orders',  
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class OrdersComponent {
 
+  constructor(private orderRepository: OrderRepository) { }
+
+  getOrders(): Order[] {
+    return this.orderRepository.getOrders();
+  }
 }

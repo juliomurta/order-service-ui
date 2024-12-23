@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { EmployeeRepository } from '../model/employee.repository';
+import { Employee } from '../model/employee.model';
 
 @Component({
   selector: 'app-employees',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class EmployeesComponent {
 
+    constructor(private employeeRepository: EmployeeRepository) { }
+
+    getEmployees(): Employee[] {
+      return this.employeeRepository.getEmployees();
+    }
 }

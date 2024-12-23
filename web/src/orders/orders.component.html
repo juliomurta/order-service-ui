@@ -11,48 +11,21 @@
             <th>Date</th>
             <th>Start</th>
             <th>Finish</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-       <tr>
-            <td>1</td>
-            <td>Mall's</td>
-            <td>Joe Doe</td>
-            <td>29/02/2024</td>
-            <td>07:00</td>
-            <td>13:00</td>
+       <tr *ngFor="let o of getOrders()">
+            <td>{{o.id}}</td>
+            <td>{{o.employeeId}}</td>
+            <td>{{o.customerId}}</td>
+            <td>{{o.date}}</td>
+            <td>{{o.start}}</td>
+            <td>{{o.finish}}</td>
+            <td>
+                <button class="button is-primary is-light">Edit</button>
+                <button class="button is-danger is-light">Delete</button>
+            </td>
        </tr>
-       <tr>
-            <td>2</td>
-            <td>Mall's</td>
-            <td>Joe Doe</td>
-            <td>29/02/2024</td>
-            <td>07:00</td>
-            <td>13:00</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Mall's</td>
-            <td>Joe Doe</td>
-            <td>29/02/2024</td>
-            <td>07:00</td>
-            <td>13:00</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Mall's</td>
-            <td>Joe Doe</td>
-            <td>29/02/2024</td>
-            <td>07:00</td>
-            <td>13:00</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Mall's</td>
-            <td>Joe Doe</td>
-            <td>29/02/2024</td>
-            <td>07:00</td>
-            <td>13:00</td>
-        </tr>
     </tbody>
 </table>

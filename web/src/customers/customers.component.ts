@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CustomerRepository } from '../model/customer.repository';
+import { Customer } from '../model/customer.model';
 
 @Component({
   selector: 'app-customers',
@@ -7,4 +9,9 @@ import { Component } from '@angular/core';
 })
 export class CustomersComponent {
 
+  constructor(private customerRepository: CustomerRepository) { }
+
+  getCustomers(): Customer[] {
+    return this.customerRepository.getCustomers();
+  }  
 }

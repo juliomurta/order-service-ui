@@ -6,6 +6,10 @@ import { OrdersComponent } from '../orders/orders.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CustomersComponent } from '../customers/customers.component';
+import { StaticDataSource } from '../model/static.datasource';
+import { CustomerRepository } from '../model/customer.repository';
+import { EmployeeRepository } from '../model/employee.repository';
+import { OrderRepository } from '../model/order.repository';
 
 
 
@@ -14,6 +18,12 @@ import { CustomersComponent } from '../customers/customers.component';
     CommonModule,
     FormsModule,
     RouterModule
+  ],
+  providers: [
+    CustomerRepository,
+    EmployeeRepository,
+    OrderRepository,
+    StaticDataSource
   ],
   declarations: [
     HomeComponent,

@@ -8,33 +8,18 @@
             <th>Id</th>
             <th>Name</th>
             <th>Document Number</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>Joe Doe</td>
-            <td>123456789</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Joe Doe</td>
-            <td>123456789</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Joe Doe</td>
-            <td>123456789</td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Joe Doe</td>
-            <td>123456789</td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Joe Doe</td>
-            <td>123456789</td>
-        </tr>
+        <tr *ngFor="let c of getCustomers()">
+            <td>{{c.id}}</td>
+            <td>{{c.name}}</td>
+            <td>{{c.documentNumber}}</td>
+            <td>
+                <button class="button is-primary is-light">Edit</button>
+                <button class="button is-danger is-light">Delete</button>
+            </td>
+        </tr>       
     </tbody>
 </table>
