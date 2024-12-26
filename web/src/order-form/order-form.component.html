@@ -22,7 +22,8 @@
                         <div class="control">
                             <div class="select is-fullwidth">                                
                                 <select #employee="ngModel" name="employee" [(ngModel)]="order.employeeId">
-                                    <option selected>Select an option</option>                                    
+                                    <option selected>Select an option</option>
+                                    
                                     <option *ngFor="let item of employees" [ngValue]="item.id">{{ item.name }}</option>
                                 </select>
                             </div>

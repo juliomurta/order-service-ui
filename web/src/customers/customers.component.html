@@ -1,4 +1,4 @@
-<h1 class="title">Customers</h1>
+<h1 class="title">Customers <button class="button is-link" routerLink="/customer/new" routerLinkActive="active">Create New</button></h1>
 
 <article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
     <div class="message-body" *ngIf="showSuccess && showRemoveResult">
@@ -22,9 +22,29 @@
       There were an error while creating the customer.
     </div>
 </article>
-<div class="block">
-    <button class="button is-link" routerLink="/customer/new" routerLinkActive="active">Create New</button>
+
+<div class="field is-grouped is-fullwidth">
+  <div class="column is-two-fifths">
+    <div class="field">
+      <label class="label">Name</label>
+      <div class="control">
+        <input class="input" type="text" />
+      </div>
+    </div>
+  </div>  
+  <div class="column is-two-fifths">
+    <div class="field">
+      <label class="label">Document Number</label>
+      <div class="control">
+        <input class="input" type="text" />
+      </div>
+    </div>
+  </div>  
+  <div class="column is-one-fifth" style="padding-top: 40px;">
+    <button class="button is-link">Search</button>
+  </div>
 </div>
+
 <table class="table  is-bordered is-striped is-narrow is-hoverable is-fullwidth">
     <thead>
         <tr>
