@@ -127,7 +127,7 @@ export class StaticDataSource {
         return from([order]);
     }
 
-    removeOrders(id: string): Observable<boolean> {
+    removeOrder(id: string): Observable<boolean> {
         console.log(`${id} was removed!`);
         return from([true]);
     } 

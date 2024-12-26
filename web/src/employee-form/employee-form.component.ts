@@ -21,7 +21,6 @@ export class EmployeeFormComponent {
     if(id) {
       const value = this.employeeRepository.getEmployee(id);
       if(value !== undefined) {
-        debugger;
         this.employee = value;
       }
     }
@@ -29,7 +28,6 @@ export class EmployeeFormComponent {
 
   save(form: NgForm) {
     this.employeeRepository.saveEmployee(this.employee).subscribe(result => {
-      debugger;
       this.router.navigateByUrl("/employees/update/success");
     });
   }

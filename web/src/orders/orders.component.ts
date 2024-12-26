@@ -11,6 +11,8 @@ import { BaseComponent } from '../base.component';
 })
 export class OrdersComponent extends BaseComponent {
 
+  selectedOrder: Order | undefined;
+
   constructor(private orderRepository: OrderRepository,
               private router: Router,
               activateRoute: ActivatedRoute
@@ -27,7 +29,23 @@ export class OrdersComponent extends BaseComponent {
     this.router.navigateByUrl(`order/edit/${id}`);
   }
 
-  remove(id: string) {
-    alert(id);
+  showRemoveModal(id: string) {
+    this.selectedOrder = this.orderRepository.getOrder(id);
+    super.toggleModal();    
+  }
+
+  confirmDelete() {
+    if (this.selectedOrder != undefined) {
+      this.orderRepository.removeOrder(this.selectedOrder.id).subscribe(result => {        
+        this.toggleModal();
+        this.showRemoveResult = true;
+
+        if (result) {
+          this.showSuccess = true;
+        } else {
+          this.showError = true;
+        }
+      });
+    }
   }
 }

@@ -25,4 +25,8 @@ export class OrderRepository {
     saveOrder(order: Order): Observable<Order> {
         return this.dataSource.saveOrder(order);
     }
+
+    removeOrder(id: string): Observable<boolean> {
+        return this.dataSource.removeOrder(id);
+    }
 }

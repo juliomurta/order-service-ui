@@ -12,7 +12,6 @@ export class BaseComponent {
   constructor(router: Router,
               activateRoute: ActivatedRoute
   ) { 
-    debugger;
     const result = activateRoute.snapshot.params["result"];
     this.showSuccess = result === "success";
     this.showError = result === "error";

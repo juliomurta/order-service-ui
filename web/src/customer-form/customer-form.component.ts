@@ -28,7 +28,6 @@ export class CustomerFormComponent {
 
   save(form: NgForm) {
     this.customerRepository.saveCustomer(this.customer).subscribe(result => {
-      debugger;
       this.router.navigateByUrl("/customers/update/success");  
     });    
   }

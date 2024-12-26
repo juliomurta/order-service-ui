@@ -29,7 +29,6 @@ export class OrderFormComponent {
     if(id) {
       const value = this.orderRepository.getOrder(id);
       if(value !== undefined) {
-        debugger;
         this.order = value;
       }
     }
@@ -41,7 +40,8 @@ export class OrderFormComponent {
   }
 
   save(form: NgForm) {
-    this.orderRepository.saveOrder(this.order);
-    this.router.navigateByUrl("/order");
+    this.orderRepository.saveOrder(this.order).subscribe(result => {
+      this.router.navigateByUrl("/orders/update/success");
+    });
   }
 }

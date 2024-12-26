@@ -1,7 +1,7 @@
 <h1 class="title">Employees</h1>
 <article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
     <div class="message-body" *ngIf="showSuccess && showRemoveResult">
-        The employee<span class="has-text-weight-bold">{{selectedEmployee?.name}}</span> was removed successfully!
+        The employee <span class="has-text-weight-bold">{{selectedEmployee?.name}}</span> was removed successfully!
     </div>
     <div class="message-body" *ngIf="showError && showRemoveResult">
       There were an error while removing the employee <span class="has-text-weight-bold">{{selectedEmployee?.name}}.</span>
