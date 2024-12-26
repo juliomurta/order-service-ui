@@ -11,11 +11,13 @@ import { CustomerFormComponent } from '../customer-form/customer-form.component'
 export const routes: Routes = [
    { path: "home", component: HomeComponent },
 
-   { path: "employees", component: EmployeesComponent },
+   { path: "employees", component: EmployeesComponent },   
+   { path: "employees/:operation/:result", component: EmployeesComponent},
    { path: "employee/new", component: EmployeeFormComponent },
    { path: "employee/edit/:id", component: EmployeeFormComponent },
 
    { path: "orders", component: OrdersComponent},
+   { path: "orders/:operation/:result", component: OrdersComponent},
    { path: "order/new", component: OrderFormComponent },
    { path: "order/edit/:id", component: OrderFormComponent },
 

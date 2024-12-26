@@ -25,4 +25,8 @@ export class EmployeeRepository {
     saveEmployee(employee: Employee): Observable<Employee> {
         return this.dataSource.saveEmployee(employee);
     }
+
+    removeEmployee(id: string): Observable<boolean> {
+        return this.dataSource.removeEmployee(id);
+    }
 }

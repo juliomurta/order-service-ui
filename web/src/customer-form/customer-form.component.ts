@@ -17,7 +17,6 @@ export class CustomerFormComponent {
               private router: Router,              
               activateRoute: ActivatedRoute
   ) { 
-    debugger;
     const id = activateRoute.snapshot.params["id"];
     if (id) {
       const value = this.customerRepository.getCustomer(id);

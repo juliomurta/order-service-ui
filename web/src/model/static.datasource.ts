@@ -117,8 +117,18 @@ export class StaticDataSource {
         return from([employee]);
     }
 
+    removeEmployee(id: string): Observable<boolean> {
+        console.log(`${id} was removed!`);
+        return from([true]);
+    } 
+
     saveOrder(order: Order): Observable<Order> {
         console.log(JSON.stringify(order));
         return from([order]);
     }
+
+    removeOrders(id: string): Observable<boolean> {
+        console.log(`${id} was removed!`);
+        return from([true]);
+    } 
 }

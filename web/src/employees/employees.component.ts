@@ -11,6 +11,8 @@ import { BaseComponent } from '../base.component';
 })
 export class EmployeesComponent extends BaseComponent {
 
+    selectedEmployee: Employee | undefined;
+
     constructor(private employeeRepository: EmployeeRepository,
                 private router: Router,
                 activateRoute: ActivatedRoute
@@ -26,7 +28,23 @@ export class EmployeesComponent extends BaseComponent {
       this.router.navigateByUrl(`employee/edit/${id}`);
     }
 
-    remove(id: string) {
-      alert(id);
+    showRemoveModal(id: string) {
+      this.selectedEmployee = this.employeeRepository.getEmployee(id);
+      super.toggleModal();    
+    }
+
+    confirmDelete() {
+      if (this.selectedEmployee != undefined) {
+        this.employeeRepository.removeEmployee(this.selectedEmployee.id).subscribe(result => {        
+          this.toggleModal();
+          this.showRemoveResult = true;
+  
+          if (result) {
+            this.showSuccess = true;
+          } else {
+            this.showError = true;
+          }
+        });
+      }
     }
 }

@@ -30,7 +30,7 @@ export class CustomersComponent extends BaseComponent {
   
   showRemoveModal(id: string) {
     this.selectedCustomer = this.customerRepository.getCustomer(id);
-    this.toggleModal();    
+    super.toggleModal();    
   }
 
   confirmDelete() {

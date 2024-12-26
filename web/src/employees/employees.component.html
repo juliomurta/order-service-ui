@@ -1,4 +1,19 @@
 <h1 class="title">Employees</h1>
+<article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
+    <div class="message-body" *ngIf="showSuccess && showRemoveResult">
+        The employee<span class="has-text-weight-bold">{{selectedEmployee?.name}}</span> was removed successfully!
+    </div>
+    <div class="message-body" *ngIf="showError && showRemoveResult">
+      There were an error while removing the employee <span class="has-text-weight-bold">{{selectedEmployee?.name}}.</span>
+    </div>
+
+    <div class="message-body" *ngIf="showSuccess && showUpdateResult">
+      Employee updated successfully!
+    </div>
+    <div class="message-body" *ngIf="showError && showUpdateResult">
+      There were an error while updating the employee.
+    </div>
+</article>
 <div class="block">
     <button class="button is-link" routerLink="/employee/new" routerLinkActive="active">Create New</button>
 </div>
@@ -18,7 +33,7 @@
             <td>{{e.documentNumber}}</td>
             <td>
                 <button class="button is-primary is-light" (click)="edit(e.id)">Edit</button>
-                <button class="button is-danger is-light" (click)="remove(e.id)">Remove</button>
+                <button class="button is-danger is-light" (click)="showRemoveModal(e.id)">Remove</button>
             </td>
         </tr>
     </tbody>
@@ -43,3 +58,20 @@
       <li><a href="#" class="pagination-link" aria-label="Goto page 86">86</a></li>
     </ul>
   </nav>
+  
+  <div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
+    <div class="modal-background" (click)="toggleModal()"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Attention!</p>
+        <button class="delete" aria-label="close" (click)="toggleModal()"></button>
+      </header>
+      <section class="modal-card-body">
+        Are you sure you want to remove the employee <span class="has-text-weight-bold">{{ selectedEmployee?.name }}</span> ?
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-danger" style="margin-right: 10px;" (click)="confirmDelete()">Yes</button>
+        <button class="button" (click)="toggleModal()">No</button>
+      </footer>
+    </div>
+  </div>

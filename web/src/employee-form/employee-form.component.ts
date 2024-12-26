@@ -28,7 +28,9 @@ export class EmployeeFormComponent {
   }
 
   save(form: NgForm) {
-    this.employeeRepository.saveEmployee(this.employee);
-    this.router.navigateByUrl("/employee");
+    this.employeeRepository.saveEmployee(this.employee).subscribe(result => {
+      debugger;
+      this.router.navigateByUrl("/employees/update/success");
+    });
   }
 }
