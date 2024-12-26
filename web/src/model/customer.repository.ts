@@ -18,6 +18,10 @@ export class CustomerRepository {
         return this.customers;
     }
 
+    getCustomer(id: string): Customer | undefined {
+        return this.dataSource.getCustomer(id);
+    }
+
     saveCustomer(customer: Customer): Observable<Customer> {
         return this.dataSource.saveCustomer(customer);
     }

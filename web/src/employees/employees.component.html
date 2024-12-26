@@ -17,8 +17,8 @@
             <td>{{e.name}}</td>
             <td>{{e.documentNumber}}</td>
             <td>
-                <button class="button is-primary is-light">Edit</button>
-                <button class="button is-danger is-light">Delete</button>
+                <button class="button is-primary is-light" (click)="edit(e.id)">Edit</button>
+                <button class="button is-danger is-light" (click)="remove(e.id)">Remove</button>
             </td>
         </tr>
     </tbody>

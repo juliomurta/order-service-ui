@@ -23,8 +23,8 @@
             <td>{{o.start}}</td>
             <td>{{o.finish}}</td>
             <td>
-                <button class="button is-primary is-light">Edit</button>
-                <button class="button is-danger is-light">Delete</button>
+                <button class="button is-primary is-light" (click)="edit(o.id)">Edit</button>
+                <button class="button is-danger is-light" (click)="remove(o.id)">Remove</button>
             </td>
        </tr>
     </tbody>

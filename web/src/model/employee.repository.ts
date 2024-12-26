@@ -18,6 +18,10 @@ export class EmployeeRepository {
         return this.employees;
     }
 
+    getEmployee(id: string): Employee | undefined {
+        return this.dataSource.getEmployee(id);
+    }
+
     saveEmployee(employee: Employee): Observable<Employee> {
         return this.dataSource.saveEmployee(employee);
     }

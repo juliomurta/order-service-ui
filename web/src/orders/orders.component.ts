@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OrderRepository } from '../model/order.repository';
 import { Order } from '../model/order.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orders',  
@@ -9,9 +10,20 @@ import { Order } from '../model/order.model';
 })
 export class OrdersComponent {
 
-  constructor(private orderRepository: OrderRepository) { }
+  constructor(private orderRepository: OrderRepository,
+              private router: Router
+  ) { }
 
   getOrders(): Order[] {
     return this.orderRepository.getOrders();
+  }
+
+  
+  edit(id: string) {
+    this.router.navigateByUrl(`orders/edit/${id}`);
+  }
+
+  remove(id: string) {
+    alert(id);
   }
 }

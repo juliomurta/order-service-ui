@@ -18,6 +18,10 @@ export class OrderRepository {
         return this.orders;
     }
 
+    getOrder(id: string): Order | undefined {
+        return this.dataSource.getOrder(id);
+    }
+
     saveOrder(order: Order): Observable<Order> {
         return this.dataSource.saveOrder(order);
     }

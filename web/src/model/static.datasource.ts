@@ -83,13 +83,28 @@ export class StaticDataSource {
         return from([this.customers]);
     }
 
+    getCustomer(id: string): Customer | undefined {
+        const customer = this.customers.find(c => c.id === id);
+        return customer;
+    }
+
     getEmployees(): Observable<Employee[]> {
         return from([this.employees]);
+    }
+
+    getEmployee(id: string): Employee | undefined {
+        const employee = this.employees.find(e => e.id === id);
+        return employee;
     }
 
     saveCustomer(customer: Customer): Observable<Customer> {
         console.log(JSON.stringify(customer));
         return from([customer]);
+    }
+
+    getOrder(id: string): Order | undefined {
+        const order = this.orders.find(o => o.id === id);
+        return order;
     }
 
     saveEmployee(employee: Employee): Observable<Employee> {

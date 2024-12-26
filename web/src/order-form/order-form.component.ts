@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Order } from '../model/order.model';
 import { OrderRepository } from '../model/order.repository';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Customer } from '../model/customer.model';
 import { Employee } from '../model/employee.model';
@@ -22,8 +22,18 @@ export class OrderFormComponent {
   constructor(private orderRepository: OrderRepository,
               private customerRepository: CustomerRepository,
               private employeeRepository: EmployeeRepository,
-              private router: Router
-  ) { }
+              private router: Router,
+              activateRoute: ActivatedRoute
+  ) { 
+    const id = activateRoute.snapshot.params["id"];
+    if(id) {
+      const value = this.orderRepository.getOrder(id);
+      if(value !== undefined) {
+        debugger;
+        this.order = value;
+      }
+    }
+  }
 
   ngOnInit() {
     this.customers = this.customerRepository.getCustomers();

@@ -12,13 +12,13 @@ export const routes: Routes = [
    { path: "home", component: HomeComponent },
    { path: "employees", component: EmployeesComponent },
    { path: "employees/new", component: EmployeeFormComponent },
-   { path: "employees/edit", component: EmployeeFormComponent },
+   { path: "employees/edit/:id", component: EmployeeFormComponent },
    { path: "orders", component: OrdersComponent},
    { path: "orders/new", component: OrderFormComponent },
-   { path: "orders/edit", component: OrderFormComponent },
+   { path: "orders/edit/:id", component: OrderFormComponent },
    { path: "customers", component: CustomersComponent },
    { path: "customers/new", component: CustomerFormComponent },
-   { path: "customers/edit", component: CustomerFormComponent },
+   { path: "customers/edit/:id", component: CustomerFormComponent },
    { path: "login", component: LoginComponent},   
    { path: "**", redirectTo: "/home"}
 ];
