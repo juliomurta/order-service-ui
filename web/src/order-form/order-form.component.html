@@ -1,75 +1,94 @@
 <div class="columns">
     <div class="column is-three-quarters">
         <h1 class="title">Service Order</h1>
-        <div class="field is-grouped">
-            <div class="column is-half" style="padding-left: 0;">
-                <div class="field">
-                    <label class="label">Customer</label>
-                    <div class="control">
-                        <div class="select is-fullwidth">
-                            <select>
-                                <option>Select an option</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="column is-half">
-                <div class="field">
-                    <label class="label">Employees</label>
-                    <div class="control">
-                        <div class="select is-fullwidth">
-                            <select>
-                                <option>Select an option</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>  
-        <div class="field is-grouped">
-            <div class="column is-half" style="padding-left: 0;">
-                <div class="field">
-                    <label class="label">Date</label>
-                    <div class="control">
-                        <input class="input" type="date" />
-                    </div>
-                </div>
-            </div>
-            <div class="column is-grouped is-half">
-                <div class="columns">
-                    <div class="column is-half">
-                        <div class="field">
-                            <label class="label">Start</label>
-                            <div class="control">
-                                <input class="input" type="time" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-half">
-                        <div class="field">
-                            <label class="label">Finish</label>
-                            <div class="control">
-                                <input class="input" type="time" />
+        <form novalidate #form="ngForm" (ngSubmit)="save(form)">
+            <div class="field is-grouped">
+                <div class="column is-half" style="padding-left: 0;">
+                    <div class="field">
+                        <label class="label">Customer</label>
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select #customer="ngModel" name="customer" [(ngModel)]="order.customerId">
+                                    <option value="" selected>Select an option</option>
+                                    <option *ngFor="let item of customers" [ngValue]="item.id">{{ item.name }}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="column is-half">
+                    <div class="field">
+                        <label class="label">Employees</label>
+                        <div class="control">
+                            <div class="select is-fullwidth">                                
+                                <select #employee="ngModel" name="employee" [(ngModel)]="order.employeeId">
+                                    <option selected>Select an option</option>                                    
+                                    <option *ngFor="let item of employees" [ngValue]="item.id">{{ item.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <div class="field is-grouped">
+                <div class="column is-half" style="padding-left: 0;">
+                    <div class="field">
+                        <label class="label">Date</label>
+                        <div class="control">
+                            <input class="input" 
+                                   type="date" 
+                                   #date="ngModel"
+                                   name="date"
+                                   [(ngModel)]="order.date"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-grouped is-half">
+                    <div class="columns">
+                        <div class="column is-half">
+                            <div class="field">
+                                <label class="label">Start</label>
+                                <div class="control">
+                                    <input class="input" 
+                                           type="time" 
+                                           #start="ngModel"
+                                           name="start"
+                                           [(ngModel)]="order.start"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-half">
+                            <div class="field">
+                                <label class="label">Finish</label>
+                                <div class="control">
+                                    <input class="input" 
+                                           type="time" 
+                                           #finish="ngModel"
+                                           name="finish"
+                                           [(ngModel)]="order.finish"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="field">
-            <label class="label">Description</label>
-            <div class="control">
-              <textarea class="textarea"></textarea>
+            <div class="field">
+                <label class="label">Description</label>
+                <div class="control">
+                    <textarea class="textarea"
+                              #description="ngModel"
+                              name="description"
+                              [(ngModel)]="order.description"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="field is-grouped">
-            <div class="control">
-                <button class="button is-link">Submit</button>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link" type="submit">Submit</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light">Cancel</button>
+                </div>
             </div>
-            <div class="control">
-                <button class="button is-link is-light">Cancel</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
