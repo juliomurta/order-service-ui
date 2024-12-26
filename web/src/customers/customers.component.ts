@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 })
 export class CustomersComponent {
 
+  selectedCustomer: Customer | undefined;
+  isModalActive: boolean = false;
+
   constructor(private customerRepository: CustomerRepository,
               private router: Router
   ) { }
@@ -23,6 +26,11 @@ export class CustomersComponent {
   }
   
   remove(id: string) {
-    alert(id);
+    this.selectedCustomer = this.customerRepository.getCustomer(id);
+    this.toggleModal();    
+  }
+
+  toggleModal() {
+    this.isModalActive = !this.isModalActive;
   }
 }
