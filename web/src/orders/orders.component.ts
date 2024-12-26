@@ -20,7 +20,7 @@ export class OrdersComponent {
 
   
   edit(id: string) {
-    this.router.navigateByUrl(`orders/edit/${id}`);
+    this.router.navigateByUrl(`order/edit/${id}`);
   }
 
   remove(id: string) {

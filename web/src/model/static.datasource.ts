@@ -102,6 +102,11 @@ export class StaticDataSource {
         return from([customer]);
     }
 
+    removeCustomer(id: string): Observable<boolean> {
+        console.log(`${id} was removed!`);
+        return from([true]);
+    }
+
     getOrder(id: string): Order | undefined {
         const order = this.orders.find(o => o.id === id);
         return order;

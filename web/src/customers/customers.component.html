@@ -1,6 +1,22 @@
 <h1 class="title">Customers</h1>
+
+<article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
+    <div class="message-body" *ngIf="showSuccess && showRemoveResult">
+        The customer <span class="has-text-weight-bold">{{selectedCustomer?.name}}</span> was removed successfully!
+    </div>
+    <div class="message-body" *ngIf="showError && showRemoveResult">
+      There were an error while removing the customer <span class="has-text-weight-bold">{{selectedCustomer?.name}}.</span>
+    </div>
+
+    <div class="message-body" *ngIf="showSuccess && showUpdateResult">
+      Customer updated successfully!
+    </div>
+    <div class="message-body" *ngIf="showError && showUpdateResult">
+      There were an error while updating the customer.
+    </div>
+</article>
 <div class="block">
-    <button class="button is-link" routerLink="/customers/new" routerLinkActive="active">Create New</button>
+    <button class="button is-link" routerLink="/customer/new" routerLinkActive="active">Create New</button>
 </div>
 <table class="table  is-bordered is-striped is-narrow is-hoverable is-fullwidth">
     <thead>
@@ -18,7 +34,7 @@
             <td>{{c.documentNumber}}</td>
             <td>
                 <button class="button is-primary is-light" (click)="edit(c.id)">Edit</button>
-                <button class="button is-danger is-light" (click)="remove(c.id)">Remove</button>
+                <button class="button is-danger is-light" (click)="showRemoveModal(c.id)">Remove</button>
             </td>
         </tr>       
     </tbody>
@@ -55,7 +71,7 @@
         Are you sure you want to remove the customer <span class="has-text-weight-bold">{{ selectedCustomer?.name }}</span> ?
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-danger" style="margin-right: 10px;">Yes</button>
+        <button class="button is-danger" style="margin-right: 10px;" (click)="confirmDelete()">Yes</button>
         <button class="button" (click)="toggleModal()">No</button>
       </footer>
     </div>

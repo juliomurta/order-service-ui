@@ -19,7 +19,7 @@ export class EmployeesComponent {
     }
 
     edit(id: string) {
-      this.router.navigateByUrl(`employees/edit/${id}`);
+      this.router.navigateByUrl(`employee/edit/${id}`);
     }
 
     remove(id: string) {

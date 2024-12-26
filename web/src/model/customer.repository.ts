@@ -25,4 +25,8 @@ export class CustomerRepository {
     saveCustomer(customer: Customer): Observable<Customer> {
         return this.dataSource.saveCustomer(customer);
     }
+
+    removeCustomer(id: string): Observable<boolean> {
+        return this.dataSource.removeCustomer(id);
+    }
 }

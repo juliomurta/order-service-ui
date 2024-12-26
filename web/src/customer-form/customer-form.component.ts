@@ -17,6 +17,7 @@ export class CustomerFormComponent {
               private router: Router,              
               activateRoute: ActivatedRoute
   ) { 
+    debugger;
     const id = activateRoute.snapshot.params["id"];
     if (id) {
       const value = this.customerRepository.getCustomer(id);
@@ -27,7 +28,9 @@ export class CustomerFormComponent {
   }
 
   save(form: NgForm) {
-    this.customerRepository.saveCustomer(this.customer);
-    this.router.navigateByUrl("/customers");
+    this.customerRepository.saveCustomer(this.customer).subscribe(result => {
+      debugger;
+      this.router.navigateByUrl("/customers/update/success");  
+    });    
   }
 }
