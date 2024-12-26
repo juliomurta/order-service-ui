@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms';
 export class EmployeeFormComponent {
 
   employee: Employee = new Employee();
+  editing: boolean = false;
 
   constructor(private employeeRepository: EmployeeRepository,
               private router: Router,
@@ -22,13 +23,18 @@ export class EmployeeFormComponent {
       const value = this.employeeRepository.getEmployee(id);
       if(value !== undefined) {
         this.employee = value;
+        this.editing = true;
       }
     }
   }
 
   save(form: NgForm) {
     this.employeeRepository.saveEmployee(this.employee).subscribe(result => {
-      this.router.navigateByUrl("/employees/update/success");
+      if(this.editing) {
+        this.router.navigateByUrl("/employees/update/success");
+      } else {
+        this.router.navigateByUrl("/employees/create/success");
+      }
     });
   }
 }

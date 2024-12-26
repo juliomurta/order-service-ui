@@ -7,6 +7,7 @@ export class BaseComponent {
   showError: boolean = false;
 
   showUpdateResult: boolean = false;
+  showCreateResult: boolean = false;
   showRemoveResult: boolean = false;
 
   constructor(router: Router,
@@ -17,6 +18,7 @@ export class BaseComponent {
     this.showError = result === "error";
         
     const operation = activateRoute.snapshot.params["operation"];
+    this.showCreateResult = operation === "create";
     this.showUpdateResult = operation === "update";
     this.showRemoveResult = operation === "remove";  
   }

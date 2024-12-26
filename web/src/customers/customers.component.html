@@ -14,6 +14,13 @@
     <div class="message-body" *ngIf="showError && showUpdateResult">
       There were an error while updating the customer.
     </div>
+
+    <div class="message-body" *ngIf="showSuccess && showCreateResult">
+      Customer created successfully!
+    </div>
+    <div class="message-body" *ngIf="showError && showCreateResult">
+      There were an error while creating the customer.
+    </div>
 </article>
 <div class="block">
     <button class="button is-link" routerLink="/customer/new" routerLinkActive="active">Create New</button>

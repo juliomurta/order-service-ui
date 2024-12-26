@@ -23,7 +23,6 @@ export class OrdersComponent extends BaseComponent {
   getOrders(): Order[] {
     return this.orderRepository.getOrders();
   }
-
   
   edit(id: string) {
     this.router.navigateByUrl(`order/edit/${id}`);

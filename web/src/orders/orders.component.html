@@ -13,6 +13,13 @@
   <div class="message-body" *ngIf="showError && showUpdateResult">
     There were an error while updating the service order.
   </div>
+
+  <div class="message-body" *ngIf="showSuccess && showCreateResult">
+    Service order created successfully!
+  </div>
+  <div class="message-body" *ngIf="showError && showCreateResult">
+    There were an error while creating the service order.
+  </div>
 </article>
 <div class="block">
     <button class="button is-link" routerLink="/order/new" routerLinkActive="active">Create New</button>

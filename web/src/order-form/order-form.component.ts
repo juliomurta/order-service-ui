@@ -18,6 +18,7 @@ export class OrderFormComponent {
   order: Order = new Order();
   customers: Customer[] = [];
   employees: Employee[] = [];
+  editing: boolean = false;
 
   constructor(private orderRepository: OrderRepository,
               private customerRepository: CustomerRepository,
@@ -30,6 +31,7 @@ export class OrderFormComponent {
       const value = this.orderRepository.getOrder(id);
       if(value !== undefined) {
         this.order = value;
+        this.editing = true;
       }
     }
   }
@@ -41,7 +43,11 @@ export class OrderFormComponent {
 
   save(form: NgForm) {
     this.orderRepository.saveOrder(this.order).subscribe(result => {
-      this.router.navigateByUrl("/orders/update/success");
+      if(this.editing) {
+        this.router.navigateByUrl("/orders/update/success");
+      } else {
+        this.router.navigateByUrl("/orders/create/success");
+      }
     });
   }
 }

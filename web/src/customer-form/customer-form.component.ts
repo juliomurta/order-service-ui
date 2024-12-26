@@ -12,6 +12,7 @@ import { Customer } from '../model/customer.model';
 export class CustomerFormComponent {
 
   customer: Customer= new Customer();
+  editing: boolean = false;
 
   constructor(private customerRepository: CustomerRepository,
               private router: Router,              
@@ -22,13 +23,18 @@ export class CustomerFormComponent {
       const value = this.customerRepository.getCustomer(id);
       if (value !== undefined) {
         this.customer = value;
+        this.editing = true;
       }
     }
   }
 
   save(form: NgForm) {
     this.customerRepository.saveCustomer(this.customer).subscribe(result => {
-      this.router.navigateByUrl("/customers/update/success");  
+      if (this.editing) {
+        this.router.navigateByUrl("/customers/update/success");  
+      } else {
+        this.router.navigateByUrl("/customers/create/success");  
+      }
     });    
   }
 }
