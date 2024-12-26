@@ -2,35 +2,22 @@ import { Component } from '@angular/core';
 import { CustomerRepository } from '../model/customer.repository';
 import { Customer } from '../model/customer.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BaseComponent } from '../base.component';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.css'
 })
-export class CustomersComponent {
+export class CustomersComponent extends BaseComponent {
 
   selectedCustomer: Customer | undefined;
-
-  isModalActive: boolean = false;
-  showSuccess: boolean = false;
-  showError: boolean = false;
-
-  showUpdateResult: boolean = false;
-  showRemoveResult: boolean = false;
 
   constructor(private customerRepository: CustomerRepository,
               private router: Router,
               activateRoute: ActivatedRoute
-  ) {     
-    debugger;
-    const result = activateRoute.snapshot.params["result"];
-    this.showSuccess = result === "success";
-    this.showError = result === "error";
-        
-    const operation = activateRoute.snapshot.params["operation"];
-    this.showUpdateResult = operation === "update";
-    this.showRemoveResult = operation === "remove"   
+  ) { 
+    super(router, activateRoute);
   }
 
   getCustomers(): Customer[] {
@@ -38,7 +25,6 @@ export class CustomersComponent {
   }  
 
   edit(id: string) {
-    debugger;
     this.router.navigateByUrl(`customer/edit/${id}`);
   }
   
@@ -60,9 +46,5 @@ export class CustomersComponent {
         }
       });
     }
-  }
-
-  toggleModal() {
-    this.isModalActive = !this.isModalActive;
   }
 }

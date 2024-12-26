@@ -1,18 +1,22 @@
 import { Component } from '@angular/core';
 import { EmployeeRepository } from '../model/employee.repository';
 import { Employee } from '../model/employee.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BaseComponent } from '../base.component';
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.css'
 })
-export class EmployeesComponent {
+export class EmployeesComponent extends BaseComponent {
 
     constructor(private employeeRepository: EmployeeRepository,
-                private router: Router
-    ) { }
+                private router: Router,
+                activateRoute: ActivatedRoute
+    ) { 
+      super(router, activateRoute);
+    }
 
     getEmployees(): Employee[] {
       return this.employeeRepository.getEmployees();
