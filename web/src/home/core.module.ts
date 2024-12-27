@@ -13,6 +13,7 @@ import { OrderRepository } from '../model/order.repository';
 import { CustomerFormComponent } from '../customer-form/customer-form.component';
 import { EmployeeFormComponent } from '../employee-form/employee-form.component';
 import { OrderFormComponent } from '../order-form/order-form.component';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 
 
@@ -20,13 +21,15 @@ import { OrderFormComponent } from '../order-form/order-form.component';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    NgxMaskDirective
   ],
   providers: [
     CustomerRepository,
     EmployeeRepository,
     OrderRepository,
-    StaticDataSource
+    StaticDataSource,
+    provideNgxMask()
   ],
   declarations: [
     HomeComponent,

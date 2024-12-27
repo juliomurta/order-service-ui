@@ -29,12 +29,21 @@ export class CustomerFormComponent {
   }
 
   save(form: NgForm) {
-    this.customerRepository.saveCustomer(this.customer).subscribe(result => {
-      if (this.editing) {
-        this.router.navigateByUrl("/customers/update/success");  
-      } else {
-        this.router.navigateByUrl("/customers/create/success");  
-      }
-    });    
+    if (form.valid) {
+      this.customerRepository.saveCustomer(this.customer).subscribe(result => {
+        if (this.editing) {
+          this.router.navigateByUrl("/customers/update/success");  
+        } else {
+          this.router.navigateByUrl("/customers/create/success");  
+        }
+      });    
+    } else {
+      Object.keys(form.controls).forEach(key => {
+        const control = form.controls[key];
+        if (control.status === "INVALID" && !control.touched) {
+          control.markAsDirty();
+        }
+      });
+    }    
   }
 }

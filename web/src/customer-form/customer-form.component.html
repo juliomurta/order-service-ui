@@ -9,7 +9,22 @@
                            type="text" 
                            #name="ngModel" 
                            name="name" 
+                           required 
+                           minlength="3"
+                           maxlength="30"
                            [(ngModel)]="customer.name" />
+
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="form-error">
+                         <div *ngIf="name.hasError('required')">
+                           Name is required.
+                         </div>
+                         <div *ngIf="name.hasError('minlength')">
+                            Name min length is 3.
+                         </div>
+                         <div *ngIf="name.hasError('maxlength')">
+                            Name max length is 30.
+                         </div>
+                    </div>
                 </div>
             </div>
             <div class="field">
@@ -18,8 +33,21 @@
                     <input class="input" 
                            type="text" 
                            #documentNumber="ngModel"
-                           name="documentNumber"
+                           name="documentNumber"                           
+                           required 
+                           minlength="11"
+                           inputmode="numeric"
+                           mask="000.000.000-00"
                            [(ngModel)]="customer.documentNumber"/>
+
+                    <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="form-error">
+                        <div *ngIf="documentNumber.hasError('required')">
+                            Document Number is required.
+                        </div>
+                        <div *ngIf="documentNumber.hasError('minlength')">
+                           Document Number should have 11 characters
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="field">
@@ -29,10 +57,20 @@
                            type="email" 
                            #email="ngModel" 
                            name="email" 
-                           [(ngModel)]="customer.email" />
+                           [(ngModel)]="customer.email" 
+                           required
+                           email />
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-error">
+                        <div *ngIf="email.hasError('required')">
+                            Email is required.
+                        </div>
+                        <div *ngIf="email.hasError('email')">
+                           The input must be a valid email;
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="field is-grouped">

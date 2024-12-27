@@ -1,3 +1,7 @@
 .table th:last-child {
     width: 15%;
 }
+
+.form-error {
+    color: red;
+}
