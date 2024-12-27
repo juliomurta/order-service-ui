@@ -73,9 +73,9 @@
     <tbody>
        <tr *ngFor="let o of orders">
             <td>{{o.id}}</td>
-            <td>{{o.employeeId}}</td>
-            <td>{{o.customerId}}</td>
-            <td>{{o.date}}</td>
+            <td>{{o.employee.name}}</td>
+            <td>{{o.customer.name}}</td>
+            <td>{{o.date | date: 'dd/MM/yyyy'}}</td>
             <td>{{o.start}}</td>
             <td>{{o.finish}}</td>
             <td>

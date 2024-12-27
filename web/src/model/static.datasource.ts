@@ -10,29 +10,6 @@ import { EmployeeFilter } from "../filter/employee.filter";
 @Injectable()
 export class StaticDataSource {
 
-    private orders: Order[] = [
-        { id: "1", date: "23-01-2023", start: "08:00", finish: "17:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "2", date: "20-02-2024", start: "09:00", finish: "16:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "3", date: "19-03-2022", start: "10:00", finish: "15:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "4", date: "09-04-2024", start: "11:00", finish: "14:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "5", date: "05-05-2023", start: "08:00", finish: "10:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "6", date: "03-06-2023", start: "08:00", finish: "11:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "7", date: "14-07-2023", start: "09:00", finish: "12:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "8", date: "13-08-2022", start: "09:00", finish: "17:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "9", date: "02-09-2022", start: "09:00", finish: "16:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "10", date: "02-10-2022", start: "11:00", finish: "17:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "11", date: "27-11-2021", start: "10:00", finish: "11:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "12", date: "08-12-2022", start: "09:00", finish: "18:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "13", date: "14-01-2024", start: "08:00", finish: "17:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "14", date: "15-02-2024", start: "08:00", finish: "10:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "15", date: "30-03-2024", start: "09:00", finish: "13:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "16", date: "21-04-2023", start: "13:00", finish: "14:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "17", date: "06-05-2023", start: "14:00", finish: "15:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "19", date: "13-06-2024", start: "08:00", finish: "11:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "20", date: "03-07-2022", start: "16:00", finish: "19:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-        { id: "21", date: "23-08-2024", start: "16:00", finish: "17:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1" },
-    ];
-
     private customers: Customer[] = [
         { id: "1", documentNumber: "44689990000192", name: "aaaaa", email: "aaaa@test.com" },
         { id: "2", documentNumber: "84465074000193", name: "bbbb", email: "bbbbb@test.com" },
@@ -76,6 +53,29 @@ export class StaticDataSource {
         { id: "16", name: "ppppp", documentNumber: "50920294049", email: "ppppp@test.com", birthDate: "25-02-1998", gender: Gender.Male },
         { id: "17", name: "qqqqq", documentNumber: "82847515003", email: "qqqqq@test.com", birthDate: "07-07-1999", gender: Gender.Female },
         { id: "18", name: "rrrrr", documentNumber: "45833315093", email: "rrrrr@test.com", birthDate: "10-01-1994", gender: Gender.Male },
+    ];
+
+    private orders: Order[] = [
+        { id: "1", date: "2023-23-01", start: "08:00", finish: "17:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[0], employee: this.employees[1]},
+        { id: "2", date: "2024-20-02", start: "09:00", finish: "16:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[1], employee: this.employees[2] },
+        { id: "3", date: "2022-19-03", start: "10:00", finish: "15:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[2], employee: this.employees[3] },
+        { id: "4", date: "2024-09-04", start: "11:00", finish: "14:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[3], employee: this.employees[16] },
+        { id: "5", date: "2023-05-05", start: "08:00", finish: "10:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[4], employee: this.employees[15] },
+        { id: "6", date: "2023-03-06", start: "08:00", finish: "11:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[5], employee: this.employees[14] },
+        { id: "7", date: "2023-14-07", start: "09:00", finish: "12:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[6], employee: this.employees[13] },
+        { id: "8", date: "2022-13-08", start: "09:00", finish: "17:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[7], employee: this.employees[12] },
+        { id: "9", date: "2022-02-09", start: "09:00", finish: "16:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[8], employee: this.employees[11] },
+        { id: "10", date: "2022-02-10", start: "11:00", finish: "17:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[9], employee: this.employees[10] },
+        { id: "11", date: "2021-27-11", start: "10:00", finish: "11:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[10], employee: this.employees[9] },
+        { id: "12", date: "2022-08-12", start: "09:00", finish: "18:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[11], employee: this.employees[8] },
+        { id: "13", date: "2024-14-01", start: "08:00", finish: "17:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[12], employee: this.employees[7] },
+        { id: "14", date: "2024-15-02", start: "08:00", finish: "10:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[13], employee: this.employees[6] },
+        { id: "15", date: "2024-30-03", start: "09:00", finish: "13:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[14], employee: this.employees[5] },
+        { id: "16", date: "2023-21-04", start: "13:00", finish: "14:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[15], employee: this.employees[4] },
+        { id: "17", date: "2023-06-05", start: "14:00", finish: "15:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[16], employee: this.employees[3] },
+        { id: "19", date: "2024-13-06", start: "08:00", finish: "11:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[17], employee: this.employees[2] },
+        { id: "20", date: "2022-03-07", start: "16:00", finish: "19:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[18], employee: this.employees[1] },
+        { id: "21", date: "2024-23-08", start: "16:00", finish: "17:00", description: "test test test test test test test test test", customerId: "1", employeeId: "1", customer:  this.customers[19], employee: this.employees[0] },
     ];
 
     getServiceOrders(filter: OrderFilter): Observable<Order[]> {

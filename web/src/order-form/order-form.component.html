@@ -89,12 +89,16 @@
                                            type="time" 
                                            #finish="ngModel"
                                            name="finish"
-                                           required
+                                           required                                                                      
+                                           [afterHour]="start"
                                            [(ngModel)]="order.finish"/>
 
                                     <div *ngIf="finish.invalid && (finish.dirty || finish.touched)" class="form-error">
                                         <div *ngIf="finish.hasError('required')">
                                             Finish is required.
+                                        </div>
+                                        <div *ngIf="finish.hasError('afterHour')">
+                                            Finish must be higher than Start                
                                         </div>
                                     </div>
                                 </div>

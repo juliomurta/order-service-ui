@@ -88,8 +88,15 @@
             <input class="input" 
                    type="date"                    
                    #endBirthDate="ngModel"
-                   name="endBirthDate"
+                   name="endBirthDate"                                      
+                   [afterDate]="beginBirthDate"
                    [(ngModel)]="employeeFilter.endBirthDate"/>
+
+              <div *ngIf="endBirthDate.invalid && (endBirthDate.dirty || endBirthDate.touched)" class="form-error">                            
+                <div *ngIf="endBirthDate.hasError('afterDate')">
+                   Birth Date To must be equal or higher than Birth Date From                
+                </div>
+              </div>
         </div>
       </div>
     </div>
