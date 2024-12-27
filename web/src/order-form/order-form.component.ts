@@ -7,13 +7,14 @@ import { Customer } from '../model/customer.model';
 import { Employee } from '../model/employee.model';
 import { CustomerRepository } from '../model/customer.repository';
 import { EmployeeRepository } from '../model/employee.repository';
+import { FormBaseComponent } from '../form-base.component';
 
 @Component({
   selector: 'app-order-form',
   templateUrl: './order-form.component.html',
   styleUrl: './order-form.component.css'
 })
-export class OrderFormComponent {
+export class OrderFormComponent extends FormBaseComponent {
   
   order: Order = new Order();
   customers: Customer[] = [];
@@ -26,6 +27,7 @@ export class OrderFormComponent {
               private router: Router,
               activateRoute: ActivatedRoute
   ) { 
+    super();
     const id = activateRoute.snapshot.params["id"];
     if(id) {
       const value = this.orderRepository.getOrder(id);
@@ -42,12 +44,16 @@ export class OrderFormComponent {
   }
 
   save(form: NgForm) {
-    this.orderRepository.saveOrder(this.order).subscribe(result => {
-      if(this.editing) {
-        this.router.navigateByUrl("/orders/update/success");
-      } else {
-        this.router.navigateByUrl("/orders/create/success");
-      }
-    });
+    if (form.valid) {    
+      this.orderRepository.saveOrder(this.order).subscribe(result => {
+        if(this.editing) {
+          this.router.navigateByUrl("/orders/update/success");
+        } else {
+          this.router.navigateByUrl("/orders/create/success");
+        }
+      });
+    } else {
+      super.checkFormValidation(form);
+    }
   }
 }

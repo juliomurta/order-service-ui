@@ -8,8 +8,23 @@
                     <input class="input" 
                         type="text" 
                         #name="ngModel" 
-                        name="name" 
+                        name="name"                         
+                        required 
+                        minlength="3"
+                        maxlength="30"
                         [(ngModel)]="employee.name" />
+
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="form-error">
+                        <div *ngIf="name.hasError('required')">
+                          Name is required.
+                        </div>
+                        <div *ngIf="name.hasError('minlength')">
+                            Name min length is 3.
+                        </div>
+                        <div *ngIf="name.hasError('maxlength')">
+                            Name max length is 30.
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="field">
@@ -18,8 +33,21 @@
                     <input class="input" 
                         type="text" 
                         #documentNumber="ngModel"
-                        name="documentNumber"
+                        name="documentNumber"  
+                        required                      
+                        minlength="11"
+                        inputmode="numeric"
+                        mask="000.000.000-00"
                         [(ngModel)]="employee.documentNumber"/>
+
+                    <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="form-error">                            
+                        <div *ngIf="documentNumber.hasError('required')">
+                            Document Number is required.                
+                        </div>
+                        <div *ngIf="documentNumber.hasError('minlength')">
+                           Document Number should have 14 characters
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="field">
@@ -29,11 +57,21 @@
                         type="email"
                         #email="ngModel"
                         name="email"
+                        required
+                        email
                         [(ngModel)]="employee.email" />
 
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-error">
+                        <div *ngIf="email.hasError('required')">
+                            Email is required.
+                        </div>
+                        <div *ngIf="email.hasError('email')">
+                           The input must be a valid email;
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="field is-grouped">
@@ -45,8 +83,14 @@
                                 type="date"
                                 #birthDate="ngModel"
                                 name="birthDate"
+                                required
                                 [(ngModel)]="employee.birthDate" />
 
+                            <div *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="form-error">
+                                <div *ngIf="birthDate.hasError('required')">
+                                    Birth Date is required.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -55,11 +99,16 @@
                         <label class="label">Gender</label>
                         <div class="control">
                             <div class="select is-fullwidth">
-                                <select #gender="ngModel" name="gender" [(ngModel)]="employee.gender">
-                                    <option value="0">Select an option</option>
+                                <select #gender="ngModel" name="gender" [(ngModel)]="employee.gender" required>
+                                    <option value="">Select an option</option>
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
                                 </select>
+                                <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="form-error">
+                                    <div *ngIf="gender.hasError('required')">
+                                        Gender is required.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

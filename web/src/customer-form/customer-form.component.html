@@ -35,9 +35,9 @@
                            #documentNumber="ngModel"
                            name="documentNumber"                           
                            required 
-                           minlength="11"
+                           minlength="14"
                            inputmode="numeric"
-                           mask="000.000.000-00"
+                           mask="00.000.000/0000-00"
                            [(ngModel)]="customer.documentNumber"/>
 
                     <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="form-error">
@@ -45,7 +45,7 @@
                             Document Number is required.
                         </div>
                         <div *ngIf="documentNumber.hasError('minlength')">
-                           Document Number should have 11 characters
+                           Document Number should have 14 characters
                         </div>
                     </div>
                 </div>
@@ -57,9 +57,9 @@
                            type="email" 
                            #email="ngModel" 
                            name="email" 
-                           [(ngModel)]="customer.email" 
                            required
-                           email />
+                           email
+                           [(ngModel)]="customer.email" />
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
