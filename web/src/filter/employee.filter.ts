@@ -7,5 +7,5 @@ export class EmployeeFilter {
     public documentNumber: string = "";
     public beginBirthDate: Date = new Date();
     public endBirthDate: Date = new Date();
-    public gender?: Gender;
+    public gender: Gender = Gender.Unknown;
 }

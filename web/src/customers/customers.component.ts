@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { CustomerRepository } from '../model/customer.repository';
 import { Customer } from '../model/customer.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BaseComponent } from '../base.component';
-import { NgForm } from '@angular/forms';
+import { BaseComponent, SortDirection } from '../base.component';
 import { CustomerFilter } from '../filter/customer.filter';
 
 @Component({
@@ -56,5 +55,26 @@ export class CustomersComponent extends BaseComponent {
     this.customerRepository.getCustomers(this.customerFilter).subscribe(result => {
       this.customers = result;
     });
+  }
+
+  sort(propertyName: string, type: string = "text") {    
+    super.changeSortDirection();
+      this.customers.sort((a: any, b: any) => {
+      let value1 = 0;
+      let value2 = 0; 
+      if (type === "number") {
+        value1 = parseInt(a[propertyName]);
+        value2 = parseInt(b[propertyName]);
+      } else {
+        value1 = a[propertyName];
+        value2 = b[propertyName];
+      }
+
+      if (this.direction === SortDirection.Asc) {      
+        return value1 > value2 ? 1 : value1  < value2  ? -1 : 0;
+      } else {
+        return value1 < value2 ? 1 : value1  > value2  ? -1 : 0;
+      }
+    });      
   }
 }
