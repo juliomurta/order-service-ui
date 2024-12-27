@@ -22,47 +22,61 @@
     </div>
 </article>
 
-
-<div class="field is-grouped is-fullwidth">
-  <div class="column is-two-fifths" style="padding-left: 0;">
-    <div class="field">
-      <label class="label">Name</label>
-      <div class="control">
-        <input class="input" type="text" />
-      </div>
-    </div>
-  </div>  
-  <div class="column is-two-fifths" style="padding-left: 0;">
-    <div class="field">
-      <label class="label">Document Number</label>
-      <div class="control">
-        <input class="input" type="text" />
-      </div>
-    </div>
-  </div>  
-  <div class="column" style="padding-left: 0; padding-right: 0; width: 19%;">
-    <div class="field">
-      <label class="label">Gender</label>
-      <div class="control">
-          <div class="select is-fullwidth">
-              <select>
-                  <option value="0">Select an option</option>
-                  <option value="1">Male</option>
-                  <option value="2">Female</option>
-              </select>
-          </div>
+<form novalidate #form="ngForm" (ngSubmit)="search(form)">
+  <div class="field is-grouped is-fullwidth">
+    <div class="column is-two-fifths" style="padding-left: 0;">
+      <div class="field">
+        <label class="label">Document Number</label>
+        <div class="control">
+          <input class="input"    
+                 #documentNumber="ngModel" 
+                 name="documentNumber" 
+                 type="text" 
+                 inputmode="numeric"
+                 mask="000.000.000-00" 
+                 [(ngModel)]="employeeFilter.documentNumber"/>
         </div>
+      </div>
+    </div>  
+    <div class="column is-two-fifths" style="padding-left: 0;">
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" 
+                 #name="ngModel"
+                 name="name"
+                 type="text" 
+                 [(ngModel)]="employeeFilter.name"/>
+        </div>
+      </div>
+    </div>  
+    <div class="column" style="padding-left: 0; padding-right: 0; width: 19%;">
+      <div class="field">
+        <label class="label">Gender</label>
+        <div class="control">
+            <div class="select is-fullwidth">
+                <select #gender="ngModel" name="gender" [(ngModel)]="employeeFilter.gender">
+                    <option value="0">Select an option</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                </select>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
-</div>
-
+</form>
 
 <div class="field is-grouped is-fullwidth">
   <div class="column is-two-fifths" style="padding-left: 0;">
     <div class="field">
       <label class="label">Birth Date From</label>
       <div class="control">
-          <input class="input" type="date" />
+          <input class="input" 
+                 type="date" 
+                 #beginBirthDate="ngModel"
+                 name="beginBirthDate"
+                 [(ngModel)]="employeeFilter.beginBirthDate"/>
       </div>
     </div>
   </div>  
@@ -71,13 +85,17 @@
       <div class="field">
         <label class="label">Birth Date To</label>
         <div class="control">
-            <input class="input" type="date" />
+            <input class="input" 
+                   type="date"                    
+                   #endBirthDate="ngModel"
+                   name="endBirthDate"
+                   [(ngModel)]="employeeFilter.endBirthDate"/>
         </div>
       </div>
     </div>
   </div>  
   <div class="column" style="padding-left: 0; padding-right: 0; width: 19%; padding-top: 2.6rem;">
-    <button class="button is-link is-fullwidth">Search</button>
+    <button class="button is-link is-fullwidth" type="submit">Search</button>
   </div>
 </div>
 

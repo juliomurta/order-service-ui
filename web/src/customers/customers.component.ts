@@ -3,6 +3,8 @@ import { CustomerRepository } from '../model/customer.repository';
 import { Customer } from '../model/customer.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../base.component';
+import { NgForm } from '@angular/forms';
+import { CustomerFilter } from '../filter/customer.filter';
 
 @Component({
   selector: 'app-customers',
@@ -11,7 +13,8 @@ import { BaseComponent } from '../base.component';
 })
 export class CustomersComponent extends BaseComponent {
 
-  selectedCustomer: Customer | undefined;
+  customerFilter: CustomerFilter = new CustomerFilter();
+  selectedCustomer: Customer | undefined;  
 
   constructor(private customerRepository: CustomerRepository,
               private router: Router,
@@ -46,5 +49,9 @@ export class CustomersComponent extends BaseComponent {
         }
       });
     }
+  }
+
+  search(form: NgForm) {
+    
   }
 }

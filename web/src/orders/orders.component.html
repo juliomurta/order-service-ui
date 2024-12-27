@@ -23,35 +23,39 @@
 </article>
 
 
-<div class="field is-grouped">
-  <div class="column is-two-fifths" style="padding-left: 0;">
-      <div class="field">
-          <label class="label">Customer</label>
-          <div class="control">
-              <div class="select is-fullwidth">
-                  <select>
-                      <option value="" selected>Select an option</option>
-                  </select>
-              </div>
-          </div>
-      </div>
-  </div>
-  <div class="column is-two-fifths" style="padding-left: 0; padding-right: 0;">
-      <div class="field">
-          <label class="label">Employees</label>
-          <div class="control">
-              <div class="select is-fullwidth">                                
-                  <select>
-                      <option selected>Select an option</option>
-                  </select>
-              </div>
-          </div>
-      </div>
-  </div>
-  <div class="column" style="width: 18%; padding-top: 2.7rem;">
-    <button class="button is-link is-fullwidth">Search</button>
-  </div>
-</div>  
+<form novalidate #form="ngForm" (ngSubmit)="search(form)">
+  <div class="field is-grouped">
+    <div class="column is-two-fifths" style="padding-left: 0;">
+        <div class="field">
+            <label class="label">Customer</label>
+            <div class="control">
+                <div class="select is-fullwidth">
+                    <select #customer="ngModel" name="customer" [(ngModel)]="orderFilter.customerId">
+                        <option value="" selected>Select an option</option>                      
+                        <option *ngFor="let item of customers" [ngValue]="item.id">{{ item.name }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column is-two-fifths" style="padding-left: 0; padding-right: 0;">
+        <div class="field">
+            <label class="label">Employees</label>
+            <div class="control">
+                <div class="select is-fullwidth">                                
+                    <select #employee="ngModel" name="employee" [(ngModel)]="orderFilter.employeeId">
+                        <option value="" selected>Select an option</option>                      
+                        <option *ngFor="let item of employees" [ngValue]="item.id">{{ item.name }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column" style="width: 18%; padding-top: 2.7rem;">
+      <button class="button is-link is-fullwidth" type="submit">Search</button>
+    </div>
+  </div>  
+</form>
 
 
 <table class="table  is-bordered is-striped is-narrow is-hoverable is-fullwidth">

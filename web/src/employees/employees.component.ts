@@ -3,6 +3,8 @@ import { EmployeeRepository } from '../model/employee.repository';
 import { Employee } from '../model/employee.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../base.component';
+import { EmployeeFilter } from '../filter/employee.filter';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-employees',
@@ -11,6 +13,7 @@ import { BaseComponent } from '../base.component';
 })
 export class EmployeesComponent extends BaseComponent {
 
+    employeeFilter: EmployeeFilter = new EmployeeFilter();
     selectedEmployee: Employee | undefined;
 
     constructor(private employeeRepository: EmployeeRepository,
@@ -46,5 +49,9 @@ export class EmployeesComponent extends BaseComponent {
           }
         });
       }
+    }
+
+    search(form: NgForm) {
+      
     }
 }

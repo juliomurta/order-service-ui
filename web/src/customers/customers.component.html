@@ -23,27 +23,39 @@
     </div>
 </article>
 
-<div class="field is-grouped is-fullwidth">
-  <div class="column is-two-fifths" style="padding-left: 0;">
-    <div class="field">
-      <label class="label">Name</label>
-      <div class="control">
-        <input class="input" type="text" />
+<form novalidate #form="ngForm" (ngSubmit)="search(form)">
+  <div class="field is-grouped is-fullwidth">
+    <div class="column is-two-fifths" style="padding-left: 0;">
+      <div class="field">
+        <label class="label">Document Number</label>
+        <div class="control">
+          <input class="input"           
+                 #documentNumber="ngModel" 
+                 name="documentNumber" 
+                 type="text" 
+                 inputmode="numeric"
+                 mask="00.000.000/0000-00"
+                 [(ngModel)]="customerFilter.documentNumber" />
+        </div>
       </div>
-    </div>
-  </div>  
-  <div class="column is-two-fifths">
-    <div class="field">
-      <label class="label">Document Number</label>
-      <div class="control">
-        <input class="input" type="text" />
+    </div>  
+    <div class="column is-two-fifths">
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" 
+                 type="text" 
+                 #name="ngModel"
+                 name="name"
+                 [(ngModel)]="customerFilter.name"/>
+        </div>
       </div>
+    </div>  
+    <div class="column" style="width: 19%; padding-top: 2.7rem; padding-left: 0; padding-right: 0; ">
+      <button class="button is-link is-fullwidth" type="submit">Search</button>
     </div>
-  </div>  
-  <div class="column" style="width: 19%; padding-top: 2.7rem; padding-left: 0; padding-right: 0; ">
-    <button class="button is-link is-fullwidth">Search</button>
   </div>
-</div>
+</form>
 
 <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
     <thead>

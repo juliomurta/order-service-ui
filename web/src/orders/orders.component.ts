@@ -3,6 +3,12 @@ import { OrderRepository } from '../model/order.repository';
 import { Order } from '../model/order.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../base.component';
+import { CustomerRepository } from '../model/customer.repository';
+import { EmployeeRepository } from '../model/employee.repository';
+import { Customer } from '../model/customer.model';
+import { Employee } from '../model/employee.model';
+import { OrderFilter } from '../filter/order.filter';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-orders',  
@@ -11,13 +17,23 @@ import { BaseComponent } from '../base.component';
 })
 export class OrdersComponent extends BaseComponent {
 
-  selectedOrder: Order | undefined;
+  orderFilter: OrderFilter = new OrderFilter();
+  selectedOrder: Order | undefined;  
+  customers: Customer[] = [];
+  employees: Employee[] = [];
 
   constructor(private orderRepository: OrderRepository,
+              private customerRepository: CustomerRepository,
+              private employeeRepository: EmployeeRepository,
               private router: Router,
               activateRoute: ActivatedRoute
   ) { 
     super(router, activateRoute);
+  }
+
+  ngOnInit() {
+    this.customers = this.customerRepository.getCustomers();
+    this.employees = this.employeeRepository.getEmployees();
   }
 
   getOrders(): Order[] {
@@ -46,5 +62,9 @@ export class OrdersComponent extends BaseComponent {
         }
       });
     }
+  }
+
+  search(form: NgForm) {
+    
   }
 }
