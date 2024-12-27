@@ -1,4 +1,4 @@
-<h1 class="title">Service Order</h1>
+<h1 class="title">Service Order <button class="button is-link" routerLink="/order/new" routerLinkActive="active">Create New</button></h1>
 <article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
   <div class="message-body" *ngIf="showSuccess && showRemoveResult">
       The service order <span class="has-text-weight-bold">{{selectedOrder?.id}}</span> was removed successfully!
@@ -21,9 +21,39 @@
     There were an error while creating the service order.
   </div>
 </article>
-<div class="block">
-    <button class="button is-link" routerLink="/order/new" routerLinkActive="active">Create New</button>
-</div>
+
+
+<div class="field is-grouped">
+  <div class="column is-two-fifths" style="padding-left: 0;">
+      <div class="field">
+          <label class="label">Customer</label>
+          <div class="control">
+              <div class="select is-fullwidth">
+                  <select>
+                      <option value="" selected>Select an option</option>
+                  </select>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="column is-two-fifths" style="padding-left: 0; padding-right: 0;">
+      <div class="field">
+          <label class="label">Employees</label>
+          <div class="control">
+              <div class="select is-fullwidth">                                
+                  <select>
+                      <option selected>Select an option</option>
+                  </select>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="column" style="width: 18%; padding-top: 2.7rem;">
+    <button class="button is-link is-fullwidth">Search</button>
+  </div>
+</div>  
+
+
 <table class="table  is-bordered is-striped is-narrow is-hoverable is-fullwidth">
     <thead>
         <tr>
