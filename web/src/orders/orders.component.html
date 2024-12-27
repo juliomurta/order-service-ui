@@ -23,7 +23,7 @@
 </article>
 
 
-<form novalidate #form="ngForm" (ngSubmit)="search(form)">
+<form novalidate #form="ngForm" (ngSubmit)="search()">
   <div class="field is-grouped">
     <div class="column is-two-fifths" style="padding-left: 0;">
         <div class="field">
@@ -61,12 +61,12 @@
 <table class="table  is-bordered is-striped is-narrow is-hoverable is-fullwidth">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Customer</th>
-            <th>Employee</th>
-            <th>Date</th>
-            <th>Start</th>
-            <th>Finish</th>
+            <th (click)="sort('id', 'number')">Id  <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('customer', 'customer')">Customer <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('employee', 'employee')">Employee <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('date', 'date')">Date <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('start', 'time')">Start <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('finish', 'time')">Finish <app-sort-direction [direction]="direction" /></th>
             <th></th>
         </tr>
     </thead>

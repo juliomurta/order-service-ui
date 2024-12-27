@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../base.component';
 import { EmployeeFilter } from '../filter/employee.filter';
 import { NgForm } from '@angular/forms';
+import { SortDirection } from '../enum/sort-direction.enum';
 
 @Component({
   selector: 'app-employees',
@@ -55,6 +56,29 @@ export class EmployeesComponent extends BaseComponent {
     }
 
     search() {
-      
+      this.employeeRepository.getEmployees(this.employeeFilter).subscribe(result => {
+        this.employees = result;
+      });
     }
+
+    sort(propertyName: string, type: string = "text") {    
+      super.changeSortDirection();
+      this.employees.sort((a: any, b: any) => {
+        let value1 = 0;
+        let value2 = 0; 
+        if (type === "number") {
+          value1 = parseInt(a[propertyName]);
+          value2 = parseInt(b[propertyName]);
+        } else {
+          value1 = a[propertyName];
+          value2 = b[propertyName];
+        }
+    
+        if (this.direction === SortDirection.Asc) {      
+          return value1 > value2 ? 1 : value1  < value2  ? -1 : 0;
+        } else {
+          return value1 < value2 ? 1 : value1  > value2  ? -1 : 0;
+        }
+      });      
+  }
 }

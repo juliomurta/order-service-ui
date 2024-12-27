@@ -1,8 +1,5 @@
 import { ActivatedRoute, Router } from "@angular/router";
-
-export enum SortDirection {
-  Asc, Desc
-}
+import { SortDirection } from "./enum/sort-direction.enum";
 
 export class BaseComponent {
     
@@ -27,10 +24,6 @@ export class BaseComponent {
     this.showCreateResult = operation === "create";
     this.showUpdateResult = operation === "update";
     this.showRemoveResult = operation === "remove";  
-  }
-
-  public get sortDirection(): typeof SortDirection {
-    return SortDirection; 
   }
 
   public toggleModal() {

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { CustomerRepository } from '../model/customer.repository';
 import { Customer } from '../model/customer.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BaseComponent, SortDirection } from '../base.component';
+import { BaseComponent } from '../base.component';
 import { CustomerFilter } from '../filter/customer.filter';
+import { SortDirection } from '../enum/sort-direction.enum';
 
 @Component({
   selector: 'app-customers',

@@ -109,9 +109,9 @@
 <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Document Number</th>
+            <th (click)="sort('id', 'number')">Id <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('id', 'number')">Name <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('id', 'number')">Document Number <app-sort-direction [direction]="direction" /></th>
             <th></th>
         </tr>
     </thead>

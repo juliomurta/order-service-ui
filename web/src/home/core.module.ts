@@ -16,6 +16,7 @@ import { OrderFormComponent } from '../order-form/order-form.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { AfterDateDirective } from '../directives/afterDate.directive';
 import { AfterHourDirective } from '../directives/afterHour.directive';
+import { SortDirectionComponent } from '../sort-direction/sort-direction.component';
 
 
 
@@ -43,6 +44,7 @@ import { AfterHourDirective } from '../directives/afterHour.directive';
     EmployeeFormComponent,
     OrdersComponent,
     OrderFormComponent,
+    SortDirectionComponent
   ]
 })
 export class CoreModule { }

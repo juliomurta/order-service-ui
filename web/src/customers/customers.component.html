@@ -60,15 +60,9 @@
 <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
     <thead>
         <tr>
-            <th (click)="sort('id', 'number')">Id <span class="sort-direction" *ngIf="direction === sortDirection.Asc">&#x25B2;</span>
-                                                  <span class="sort-direction"  *ngIf="direction === sortDirection.Desc">&#x25BC;</span>
-            </th>
-            <th (click)="sort('name')">Name <span class="sort-direction" *ngIf="direction === sortDirection.Asc">&#x25B2;</span>
-                                            <span class="sort-direction"  *ngIf="direction === sortDirection.Desc">&#x25BC;</span>              
-            </th>
-            <th (click)="sort('documentNumber')">Document Number <span class="sort-direction" *ngIf="direction === sortDirection.Asc">&#x25B2;</span>
-                                                                 <span class="sort-direction" *ngIf="direction === sortDirection.Desc">&#x25BC;</span>              
-            </th>
+            <th (click)="sort('id', 'number')">Id <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('name')">Name <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('documentNumber')">Document Number <app-sort-direction [direction]="direction" /></th>
             <th></th>
         </tr>
     </thead>
