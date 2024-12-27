@@ -8,10 +8,15 @@
                         <label class="label">Customer</label>
                         <div class="control">
                             <div class="select is-fullwidth">
-                                <select #customer="ngModel" name="customer" [(ngModel)]="order.customerId">
+                                <select #customer="ngModel" name="customer" [(ngModel)]="order.customerId" required>
                                     <option value="" selected>Select an option</option>
                                     <option *ngFor="let item of customers" [ngValue]="item.id">{{ item.name }}</option>
                                 </select>
+                                <div *ngIf="customer.invalid && (customer.dirty || customer.touched)" class="form-error">
+                                    <div *ngIf="customer.hasError('required')">
+                                        Customer is required.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -21,11 +26,15 @@
                         <label class="label">Employees</label>
                         <div class="control">
                             <div class="select is-fullwidth">                                
-                                <select #employee="ngModel" name="employee" [(ngModel)]="order.employeeId">
-                                    <option selected>Select an option</option>
-                                    
+                                <select #employee="ngModel" name="employee" [(ngModel)]="order.employeeId" required>
+                                    <option value="" selected>Select an option</option>                                    
                                     <option *ngFor="let item of employees" [ngValue]="item.id">{{ item.name }}</option>
                                 </select>
+                                <div *ngIf="employee.invalid && (employee.dirty || employee.touched)" class="form-error">
+                                    <div *ngIf="employee.hasError('required')">
+                                        Employee is required.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -40,7 +49,14 @@
                                    type="date" 
                                    #date="ngModel"
                                    name="date"
+                                   required
                                    [(ngModel)]="order.date"/>
+
+                            <div *ngIf="date.invalid && (date.dirty || date.touched)" class="form-error">
+                                <div *ngIf="date.hasError('required')">
+                                    Date is required.
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -54,7 +70,14 @@
                                            type="time" 
                                            #start="ngModel"
                                            name="start"
+                                           required
                                            [(ngModel)]="order.start"/>
+
+                                    <div *ngIf="start.invalid && (start.dirty || start.touched)" class="form-error">
+                                        <div *ngIf="start.hasError('required')">
+                                            Start is required.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +89,14 @@
                                            type="time" 
                                            #finish="ngModel"
                                            name="finish"
+                                           required
                                            [(ngModel)]="order.finish"/>
+
+                                    <div *ngIf="finish.invalid && (finish.dirty || finish.touched)" class="form-error">
+                                        <div *ngIf="finish.hasError('required')">
+                                            Finish is required.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +109,18 @@
                     <textarea class="textarea"
                               #description="ngModel"
                               name="description"
+                              required
+                              maxlength="500"
                               [(ngModel)]="order.description"></textarea>
+
+                    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="form-error">
+                        <div *ngIf="description.hasError('required')">
+                            A description of the service order is required.
+                        </div>
+                        <div *ngIf="description.hasError('maxlength')">
+                            Description can not have more than 500 characters.
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="field is-grouped">
