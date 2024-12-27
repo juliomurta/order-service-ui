@@ -2,20 +2,15 @@ import { Injectable } from "@angular/core";
 import { Employee } from "./employee.model";
 import { StaticDataSource } from "./static.datasource";
 import { Observable } from "rxjs";
+import { EmployeeFilter } from "../filter/employee.filter";
 
 @Injectable()
 export class EmployeeRepository {
 
-    private employees: Employee[] = [];
+    constructor(private dataSource: StaticDataSource) { }
 
-    constructor(private dataSource: StaticDataSource) { 
-        dataSource.getEmployees().subscribe(data => {
-            this.employees = data;
-        });
-    }
-
-    getEmployees(): Employee[] {
-        return this.employees;
+    getEmployees(filter: EmployeeFilter): Observable<Employee[]> {
+        return this.dataSource.getEmployees(filter);
     }
 
     getEmployee(id: string): Employee | undefined {

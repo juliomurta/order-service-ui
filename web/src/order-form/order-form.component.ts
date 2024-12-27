@@ -8,6 +8,8 @@ import { Employee } from '../model/employee.model';
 import { CustomerRepository } from '../model/customer.repository';
 import { EmployeeRepository } from '../model/employee.repository';
 import { FormBaseComponent } from '../form-base.component';
+import { CustomerFilter } from '../filter/customer.filter';
+import { EmployeeFilter } from '../filter/employee.filter';
 
 @Component({
   selector: 'app-order-form',
@@ -39,8 +41,13 @@ export class OrderFormComponent extends FormBaseComponent {
   }
 
   ngOnInit() {
-    this.customers = this.customerRepository.getCustomers();
-    this.employees = this.employeeRepository.getEmployees();
+    this.customerRepository.getCustomers(new CustomerFilter()).subscribe(result => {
+      this.customers = result;
+    })
+
+    this.employeeRepository.getEmployees(new EmployeeFilter()).subscribe(result => {
+      this.employees = result;
+    })
   }
 
   save(form: NgForm) {

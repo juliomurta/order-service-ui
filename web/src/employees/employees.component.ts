@@ -13,6 +13,7 @@ import { NgForm } from '@angular/forms';
 })
 export class EmployeesComponent extends BaseComponent {
 
+    employees: Employee[] = [];
     employeeFilter: EmployeeFilter = new EmployeeFilter();
     selectedEmployee: Employee | undefined;
 
@@ -23,8 +24,10 @@ export class EmployeesComponent extends BaseComponent {
       super(router, activateRoute);
     }
 
-    getEmployees(): Employee[] {
-      return this.employeeRepository.getEmployees();
+    ngOnInit() {
+      this.employeeRepository.getEmployees(new EmployeeFilter()).subscribe(result => {
+        this.employees = result;
+      });
     }
 
     edit(id: string) {
@@ -51,7 +54,7 @@ export class EmployeesComponent extends BaseComponent {
       }
     }
 
-    search(form: NgForm) {
+    search() {
       
     }
 }

@@ -22,7 +22,7 @@
     </div>
 </article>
 
-<form novalidate #form="ngForm" (ngSubmit)="search(form)">
+<form novalidate #form="ngForm" (ngSubmit)="search()">
   <div class="field is-grouped is-fullwidth">
     <div class="column is-two-fifths" style="padding-left: 0;">
       <div class="field">
@@ -109,7 +109,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let e of getEmployees()">
+        <tr *ngFor="let e of employees">
             <td>{{e.id}}</td>
             <td>{{e.name}}</td>
             <td>{{e.documentNumber}}</td>

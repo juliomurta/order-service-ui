@@ -3,6 +3,9 @@ import { from, Observable } from "rxjs";
 import { Order } from "./order.model";
 import { Customer } from "./customer.model";
 import { Employee, Gender } from "./employee.model";
+import { CustomerFilter } from "../filter/customer.filter";
+import { OrderFilter } from "../filter/order.filter";
+import { EmployeeFilter } from "../filter/employee.filter";
 
 @Injectable()
 export class StaticDataSource {
@@ -75,21 +78,21 @@ export class StaticDataSource {
         { id: "18", name: "Test", documentNumber: "123456789", email: "test@test.com", birthDate: "11-04-1994", gender: Gender.Male },
     ];
 
-    getServiceOrders(): Observable<Order[]> {
+    getServiceOrders(filter: OrderFilter): Observable<Order[]> {
         return from([this.orders]);
     }
 
-    getCustomers(): Observable<Customer[]> {
+    getCustomers(filter: CustomerFilter): Observable<Customer[]> {
         return from([this.customers]);
+    }
+
+    getEmployees(filter: EmployeeFilter): Observable<Employee[]> {
+        return from([this.employees]);
     }
 
     getCustomer(id: string): Customer | undefined {
         const customer = this.customers.find(c => c.id === id);
         return customer;
-    }
-
-    getEmployees(): Observable<Employee[]> {
-        return from([this.employees]);
     }
 
     getEmployee(id: string): Employee | undefined {

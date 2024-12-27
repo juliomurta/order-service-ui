@@ -2,20 +2,17 @@ import { Injectable } from "@angular/core";
 import { Order } from "./order.model";
 import { StaticDataSource } from "./static.datasource";
 import { Observable } from "rxjs";
+import { OrderFilter } from "../filter/order.filter";
 
 @Injectable()
 export class OrderRepository {
 
     private orders: Order[] = [];
 
-    constructor(private dataSource: StaticDataSource) { 
-        dataSource.getServiceOrders().subscribe(data => {
-            this.orders = data;
-        });
-    }
+    constructor(private dataSource: StaticDataSource) { }
 
-    getOrders(): Order[] {
-        return this.orders;
+    getOrders(filter: OrderFilter): Observable<Order[]> {
+        return this.dataSource.getServiceOrders(filter);
     }
 
     getOrder(id: string): Order | undefined {

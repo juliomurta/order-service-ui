@@ -9,6 +9,8 @@ import { Customer } from '../model/customer.model';
 import { Employee } from '../model/employee.model';
 import { OrderFilter } from '../filter/order.filter';
 import { NgForm } from '@angular/forms';
+import { CustomerFilter } from '../filter/customer.filter';
+import { EmployeeFilter } from '../filter/employee.filter';
 
 @Component({
   selector: 'app-orders',  
@@ -21,6 +23,7 @@ export class OrdersComponent extends BaseComponent {
   selectedOrder: Order | undefined;  
   customers: Customer[] = [];
   employees: Employee[] = [];
+  orders: Order[] = [];
 
   constructor(private orderRepository: OrderRepository,
               private customerRepository: CustomerRepository,
@@ -32,12 +35,18 @@ export class OrdersComponent extends BaseComponent {
   }
 
   ngOnInit() {
-    this.customers = this.customerRepository.getCustomers();
-    this.employees = this.employeeRepository.getEmployees();
-  }
 
-  getOrders(): Order[] {
-    return this.orderRepository.getOrders();
+    this.customerRepository.getCustomers(new CustomerFilter()).subscribe(result => {
+      this.customers = result;
+    });
+
+    this.employeeRepository.getEmployees(new EmployeeFilter()).subscribe(result => {
+      this.employees = result;
+    });
+
+    this.orderRepository.getOrders(new OrderFilter()).subscribe(result => {
+      this.orders = result;
+    });
   }
   
   edit(id: string) {

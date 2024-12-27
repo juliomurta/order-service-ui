@@ -15,6 +15,7 @@ export class CustomersComponent extends BaseComponent {
 
   customerFilter: CustomerFilter = new CustomerFilter();
   selectedCustomer: Customer | undefined;  
+  customers: Customer[] = [];
 
   constructor(private customerRepository: CustomerRepository,
               private router: Router,
@@ -23,9 +24,9 @@ export class CustomersComponent extends BaseComponent {
     super(router, activateRoute);
   }
 
-  getCustomers(): Customer[] {
-    return this.customerRepository.getCustomers();
-  }  
+  ngOnInit() {
+    this.search();
+  }
 
   edit(id: string) {
     this.router.navigateByUrl(`customer/edit/${id}`);
@@ -51,7 +52,9 @@ export class CustomersComponent extends BaseComponent {
     }
   }
 
-  search(form: NgForm) {
-    
+  search() {
+    this.customerRepository.getCustomers(this.customerFilter).subscribe(result => {
+      this.customers = result;
+    });
   }
 }
