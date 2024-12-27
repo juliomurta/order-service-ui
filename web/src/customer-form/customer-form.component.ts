@@ -3,13 +3,14 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CustomerRepository } from '../model/customer.repository';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Customer } from '../model/customer.model';
+import { FormBaseComponent } from '../form-base.component';
 
 @Component({
   selector: 'app-customer-form',
   templateUrl: './customer-form.component.html',
   styleUrl: './customer-form.component.css'
 })
-export class CustomerFormComponent {
+export class CustomerFormComponent extends FormBaseComponent {
 
   customer: Customer= new Customer();
   editing: boolean = false;
@@ -18,6 +19,7 @@ export class CustomerFormComponent {
               private router: Router,              
               activateRoute: ActivatedRoute
   ) { 
+    super();
     const id = activateRoute.snapshot.params["id"];
     if (id) {
       const value = this.customerRepository.getCustomer(id);
@@ -38,12 +40,7 @@ export class CustomerFormComponent {
         }
       });    
     } else {
-      Object.keys(form.controls).forEach(key => {
-        const control = form.controls[key];
-        if (control.status === "INVALID" && !control.touched) {
-          control.markAsDirty();
-        }
-      });
+      super.checkFormValidation(form);
     }    
   }
 }
