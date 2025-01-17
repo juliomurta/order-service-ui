@@ -3,7 +3,7 @@ import { Order } from "./order.model";
 import { StaticDataSource } from "./static.datasource";
 import { Observable } from "rxjs";
 import { OrderFilter } from "../filter/order.filter";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Constants } from "../Constants";
 
 @Injectable()
@@ -16,6 +16,14 @@ export class OrderRepository {
     ) { }
 
     getOrders(filter: OrderFilter): Observable<Order[]> {
+        let params = new HttpParams();
+        if (filter.employeeId != '') {
+            params = params = params.append('customerId', filter.customerId);
+        }
+
+        if (filter.customerId != ''){
+            params = params.append('employeeId', filter.employeeId);
+        }
         return this.http.get<Order[]>(Constants.URL + "/orders");
     }
 

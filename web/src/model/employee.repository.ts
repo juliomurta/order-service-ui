@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Employee } from "./employee.model";
+import { Employee, Gender } from "./employee.model";
 import { StaticDataSource } from "./static.datasource";
 import { Observable } from "rxjs";
 import { EmployeeFilter } from "../filter/employee.filter";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Constants } from "../Constants";
 
 @Injectable()
@@ -14,7 +14,20 @@ export class EmployeeRepository {
     ) { }
 
     getEmployees(filter: EmployeeFilter): Observable<Employee[]> {
-        return this.http.get<Employee[]>(Constants.URL + "/employees");
+        let params = new HttpParams();
+        if (filter.name != '') {
+           params = params.append("name", filter.name);
+        }
+        
+        if (filter.documentNumber != '') {
+            params = params.append("documentNumber", filter.documentNumber);
+        }
+
+        if (filter.gender != Gender.Unknown) {
+            params = params.append("gender", filter.documentNumber);
+        }
+
+        return this.http.get<Employee[]>(Constants.URL + "/employees", {params});
     }
 
     getEmployee(id: string): Observable<Employee> {

@@ -3,7 +3,7 @@ import { Customer } from "./customer.model";
 import { StaticDataSource } from "./static.datasource";
 import { Observable } from "rxjs";
 import { CustomerFilter } from "../filter/customer.filter";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Constants } from "../Constants";
 
 @Injectable()
@@ -14,7 +14,15 @@ export class CustomerRepository {
     ) { }
 
     getCustomers(filter: CustomerFilter): Observable<Customer[]> {
-        return this.http.get<Customer[]>(Constants.URL + "/customers");
+        let params = new HttpParams();
+        if (filter.name != '') {
+           params = params.append("name", filter.name);
+        }
+
+        if (filter.documentNumber != '') {
+            params = params.append("documentNumber", filter.documentNumber);
+        }
+        return this.http.get<Customer[]>(Constants.URL + "/customers", {params});
     }
 
     getCustomer(id: string): Observable<Customer> {

@@ -25,7 +25,6 @@ export class EmployeeFormComponent extends FormBaseComponent {
       this.employeeRepository.getEmployee(id)
                              .subscribe(value => {
                                 if(value !== undefined) {
-                                  debugger;
                                   this.employee = value;
                                   this.editing = true;
                                 }
