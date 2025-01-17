@@ -54,8 +54,11 @@ export class OrdersComponent extends BaseComponent {
   }
 
   showRemoveModal(id: string) {
-    this.selectedOrder = this.orderRepository.getOrder(id);
-    super.toggleModal();    
+    this.orderRepository.getOrder(id)
+                        .subscribe(value => {
+                          this.selectedOrder = value;
+                          super.toggleModal();
+                        });
   }
 
   confirmDelete() {
@@ -66,6 +69,7 @@ export class OrdersComponent extends BaseComponent {
 
         if (result) {
           this.showSuccess = true;
+          this.search();
         } else {
           this.showError = true;
         }

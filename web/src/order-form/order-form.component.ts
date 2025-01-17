@@ -32,11 +32,13 @@ export class OrderFormComponent extends FormBaseComponent {
     super();
     const id = activateRoute.snapshot.params["id"];
     if(id) {
-      const value = this.orderRepository.getOrder(id);
-      if(value !== undefined) {
-        this.order = value;
-        this.editing = true;
-      }
+      this.orderRepository.getOrder(id)
+                          .subscribe(value => {
+                              if(value !== undefined) {
+                                this.order = value;
+                                this.editing = true;
+                              }
+                          });
     }
   }
 
@@ -51,14 +53,16 @@ export class OrderFormComponent extends FormBaseComponent {
   }
 
   save(form: NgForm) {
-    if (form.valid) {    
-      this.orderRepository.saveOrder(this.order).subscribe(result => {
-        if(this.editing) {
+    if (form.valid) {  
+      if (this.editing) {
+        this.orderRepository.updateOrder(this.order).subscribe(result => {
           this.router.navigateByUrl("/orders/update/success");
-        } else {
+        });
+      } else {
+        this.orderRepository.createOrder(this.order).subscribe(result => {
           this.router.navigateByUrl("/orders/create/success");
-        }
-      });
+        });
+      }      
     } else {
       super.checkFormValidation(form);
     }
