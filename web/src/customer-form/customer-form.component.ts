@@ -22,23 +22,29 @@ export class CustomerFormComponent extends FormBaseComponent {
     super();
     const id = activateRoute.snapshot.params["id"];
     if (id) {
-      const value = this.customerRepository.getCustomer(id);
-      if (value !== undefined) {
-        this.customer = value;
-        this.editing = true;
-      }
+      this.customerRepository.getCustomer(id)
+                             .subscribe(value => {
+                                if (value !== undefined) {
+                                  this.customer = value;
+                                  this.editing = true;
+                                }
+                             });
     }
   }
 
   save(form: NgForm) {
     if (form.valid) {
-      this.customerRepository.saveCustomer(this.customer).subscribe(result => {
-        if (this.editing) {
-          this.router.navigateByUrl("/customers/update/success");  
-        } else {
-          this.router.navigateByUrl("/customers/create/success");  
-        }
-      });    
+      if (this.editing) {
+        this.customerRepository.updateCustomer(this.customer)
+                               .subscribe(result => {
+                                  this.router.navigateByUrl("/customers/update/success");
+                               });
+      } else {
+        this.customerRepository.createCustomer(this.customer)
+                               .subscribe(result => {                                 
+                                  this.router.navigateByUrl("/customers/create/success");  
+                               });
+      }
     } else {
       super.checkFormValidation(form);
     }    

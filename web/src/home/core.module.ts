@@ -17,6 +17,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { AfterDateDirective } from '../directives/afterDate.directive';
 import { AfterHourDirective } from '../directives/afterHour.directive';
 import { SortDirectionComponent } from '../sort-direction/sort-direction.component';
+import { provideHttpClient } from '@angular/common/http';
 
 
 
@@ -32,7 +33,8 @@ import { SortDirectionComponent } from '../sort-direction/sort-direction.compone
     EmployeeRepository,
     OrderRepository,
     StaticDataSource,
-    provideNgxMask()
+    provideNgxMask(),
+    provideHttpClient()
   ],
   declarations: [    
     AfterDateDirective,

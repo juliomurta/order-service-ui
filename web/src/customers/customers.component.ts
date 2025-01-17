@@ -33,8 +33,10 @@ export class CustomersComponent extends BaseComponent {
   }
   
   showRemoveModal(id: string) {
-    this.selectedCustomer = this.customerRepository.getCustomer(id);
-    super.toggleModal();    
+    this.customerRepository.getCustomer(id).subscribe(value => {
+      this.selectedCustomer = value;
+      super.toggleModal();  
+    });      
   }
 
   confirmDelete() {
@@ -42,9 +44,9 @@ export class CustomersComponent extends BaseComponent {
       this.customerRepository.removeCustomer(this.selectedCustomer.id).subscribe(result => {        
         this.toggleModal();
         this.showRemoveResult = true;
-
         if (result) {
-          this.showSuccess = true;
+          this.showSuccess = true;          
+          this.search();
         } else {
           this.showError = true;
         }

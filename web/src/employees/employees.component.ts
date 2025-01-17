@@ -36,8 +36,11 @@ export class EmployeesComponent extends BaseComponent {
     }
 
     showRemoveModal(id: string) {
-      this.selectedEmployee = this.employeeRepository.getEmployee(id);
-      super.toggleModal();    
+      this.employeeRepository.getEmployee(id)
+                             .subscribe(value => {
+                                this.selectedEmployee = value;
+                                super.toggleModal();   
+                             });
     }
 
     confirmDelete() {
@@ -48,6 +51,7 @@ export class EmployeesComponent extends BaseComponent {
   
           if (result) {
             this.showSuccess = true;
+            this.search();
           } else {
             this.showError = true;
           }

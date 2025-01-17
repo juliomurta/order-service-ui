@@ -22,23 +22,30 @@ export class EmployeeFormComponent extends FormBaseComponent {
     super();
     const id = activateRoute.snapshot.params["id"];
     if(id) {
-      const value = this.employeeRepository.getEmployee(id);
-      if(value !== undefined) {
-        this.employee = value;
-        this.editing = true;
-      }
+      this.employeeRepository.getEmployee(id)
+                             .subscribe(value => {
+                                if(value !== undefined) {
+                                  debugger;
+                                  this.employee = value;
+                                  this.editing = true;
+                                }
+                             });
     } 
   }
 
   save(form: NgForm) {
     if(form.valid) {
-      this.employeeRepository.saveEmployee(this.employee).subscribe(result => {
-        if(this.editing) {
-          this.router.navigateByUrl("/employees/update/success");
-        } else {
-          this.router.navigateByUrl("/employees/create/success");
-        }
-      });
+      if (this.editing) {
+        this.employeeRepository.updateEmployee(this.employee)
+                               .subscribe(result => {
+                                  this.router.navigateByUrl("/employees/update/success");
+                               });
+      } else {
+        this.employeeRepository.createEmployee(this.employee)
+                               .subscribe(result => {
+                                  this.router.navigateByUrl("/employees/create/success");
+                               });
+      }
     } else {
       super.checkFormValidation(form);
     }
