@@ -14,7 +14,7 @@
                         maxlength="30"
                         [(ngModel)]="employee.name" />
 
-                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="form-error">
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="name-error form-error">
                         <div *ngIf="name.hasError('required')">
                           Name is required.
                         </div>
@@ -40,7 +40,7 @@
                         mask="000.000.000-00"
                         [(ngModel)]="employee.documentNumber"/>
 
-                    <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="form-error">                            
+                    <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="docnumber-error form-error">                            
                         <div *ngIf="documentNumber.hasError('required')">
                             Document Number is required.                
                         </div>
@@ -64,12 +64,12 @@
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
-                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-error">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="email-error form-error">
                         <div *ngIf="email.hasError('required')">
                             Email is required.
                         </div>
                         <div *ngIf="email.hasError('email')">
-                           The input must be a valid email;
+                           The input must be a valid email.
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                                 required
                                 [(ngModel)]="employee.birthDate" />
 
-                            <div *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="form-error">
+                            <div *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="birthdate-error form-error">
                                 <div *ngIf="birthDate.hasError('required')">
                                     Birth Date is required.
                                 </div>
@@ -104,7 +104,7 @@
                                     <option value="1">Male</option>
                                     <option value="2">Female</option>
                                 </select>
-                                <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="form-error">
+                                <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="gender-error form-error">
                                     <div *ngIf="gender.hasError('required')">
                                         Gender is required.
                                     </div>
