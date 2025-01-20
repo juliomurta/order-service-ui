@@ -21,6 +21,7 @@ Validate Customer Form
     Element Text Should Be    css:.docnumber-error    Document Number should have 14 characters
     Element Text Should Be    css:.email-error    The input must be a valid email.
 
+    Go To                           ${url}/customer
     Sleep    1s
     Page Should Contain Element  css:.title
 

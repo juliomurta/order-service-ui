@@ -12,7 +12,7 @@
                                     <option value="" selected>Select an option</option>
                                     <option *ngFor="let item of customers" [ngValue]="item.id">{{ item.name }}</option>
                                 </select>
-                                <div *ngIf="customer.invalid && (customer.dirty || customer.touched)" class="form-error">
+                                <div *ngIf="customer.invalid && (customer.dirty || customer.touched)" class="customer-error form-error">
                                     <div *ngIf="customer.hasError('required')">
                                         Customer is required.
                                     </div>
@@ -30,7 +30,7 @@
                                     <option value="" selected>Select an option</option>                                    
                                     <option *ngFor="let item of employees" [ngValue]="item.id">{{ item.name }}</option>
                                 </select>
-                                <div *ngIf="employee.invalid && (employee.dirty || employee.touched)" class="form-error">
+                                <div *ngIf="employee.invalid && (employee.dirty || employee.touched)" class="employee-error form-error">
                                     <div *ngIf="employee.hasError('required')">
                                         Employee is required.
                                     </div>
@@ -52,7 +52,7 @@
                                    required
                                    [(ngModel)]="order.date"/>
 
-                            <div *ngIf="date.invalid && (date.dirty || date.touched)" class="form-error">
+                            <div *ngIf="date.invalid && (date.dirty || date.touched)" class="date-error form-error">
                                 <div *ngIf="date.hasError('required')">
                                     Date is required.
                                 </div>
@@ -73,7 +73,7 @@
                                            required
                                            [(ngModel)]="order.start"/>
 
-                                    <div *ngIf="start.invalid && (start.dirty || start.touched)" class="form-error">
+                                    <div *ngIf="start.invalid && (start.dirty || start.touched)" class="start-error form-error">
                                         <div *ngIf="start.hasError('required')">
                                             Start is required.
                                         </div>
@@ -93,7 +93,7 @@
                                            [afterHour]="start"
                                            [(ngModel)]="order.finish"/>
 
-                                    <div *ngIf="finish.invalid && (finish.dirty || finish.touched)" class="form-error">
+                                    <div *ngIf="finish.invalid && (finish.dirty || finish.touched)" class="finish-error form-error">
                                         <div *ngIf="finish.hasError('required')">
                                             Finish is required.
                                         </div>
@@ -117,7 +117,7 @@
                               maxlength="500"
                               [(ngModel)]="order.description"></textarea>
 
-                    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="form-error">
+                    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="description-error form-error">
                         <div *ngIf="description.hasError('required')">
                             A description of the service order is required.
                         </div>

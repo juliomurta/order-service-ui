@@ -16,7 +16,7 @@ Validate Employee Form
     Element Text Should Be    css:.email-error    Email is required.
     Element Text Should Be    css:.birthdate-error    Birth Date is required.
     Element Text Should Be    css:.gender-error    Gender is required.
-    
+
     Input Text                      css:input[name=name]        Jo
     Input Text                      css:input[name=documentNumber]          518752
     Input Text                      css:input[name=email]    joe.doetest.com    
@@ -29,6 +29,7 @@ Validate Employee Form
     Element Text Should Be    css:.birthdate-error    Birth Date is required.
     Element Text Should Be    css:.gender-error    Gender is required.
 
+    Go To                           ${url}/employee
     Sleep    1s
     Page Should Contain Element  css:.title
 
