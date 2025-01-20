@@ -14,15 +14,12 @@
                            maxlength="30"
                            [(ngModel)]="customer.name" />
 
-                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="form-error">
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="name-error form-error">
                          <div *ngIf="name.hasError('required')">
                            Name is required.
                          </div>
                          <div *ngIf="name.hasError('minlength')">
                             Name min length is 3.
-                         </div>
-                         <div *ngIf="name.hasError('maxlength')">
-                            Name max length is 30.
                          </div>
                     </div>
                 </div>
@@ -40,7 +37,7 @@
                            mask="00.000.000/0000-00"
                            [(ngModel)]="customer.documentNumber"/>
 
-                    <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="form-error">
+                    <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="docnumber-error form-error">
                         <div *ngIf="documentNumber.hasError('required')">
                             Document Number is required.
                         </div>
@@ -63,12 +60,12 @@
                     <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                     </span>
-                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="form-error">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="email-error form-error">
                         <div *ngIf="email.hasError('required')">
                             Email is required.
                         </div>
                         <div *ngIf="email.hasError('email')">
-                           The input must be a valid email;
+                           The input must be a valid email.
                         </div>
                     </div>
                 </div>
