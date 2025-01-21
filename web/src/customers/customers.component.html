@@ -1,4 +1,4 @@
-<h1 class="title">Customers <button class="button is-link" routerLink="/customer/new" routerLinkActive="active">Create New</button></h1>
+<h1 class="title customer-title">Customers <button class="button is-link new-customer-button" routerLink="/customer/new" routerLinkActive="active">Create New</button></h1>
 
 <article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
     <div class="message-body" *ngIf="showSuccess && showRemoveResult">
@@ -23,10 +23,10 @@
     </div>
 </article>
 
-<form novalidate #form="ngForm" (ngSubmit)="search()">
+<form novalidate #form="ngForm" (ngSubmit)="search()" class="customer-search-form">
   <div class="field is-grouped is-fullwidth">
     <div class="column is-two-fifths" style="padding-left: 0;">
-      <div class="field">
+      <div class="field docnumber-field">
         <label class="label">Document Number</label>
         <div class="control">
           <input class="input"           
@@ -40,7 +40,7 @@
       </div>
     </div>  
     <div class="column is-two-fifths">
-      <div class="field">
+      <div class="field name-field">
         <label class="label">Name</label>
         <div class="control">
           <input class="input" 
@@ -52,17 +52,17 @@
       </div>
     </div>  
     <div class="column" style="width: 19%; padding-top: 2.7rem; padding-left: 0; padding-right: 0; ">
-      <button class="button is-link is-fullwidth" type="submit">Search</button>
+      <button class="button is-link is-fullwidth search-customer-button" type="submit">Search</button>
     </div>
   </div>
 </form>
 
-<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+<table class="table customer-table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
     <thead>
         <tr>
-            <th (click)="sort('id', 'number')">Id <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('name')">Name <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('documentNumber')">Document Number <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('id', 'number')" class="id-table-column">Id <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('name')" class="name-table-column">Name <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('documentNumber')" class="docnumber-table-column">Document Number <app-sort-direction [direction]="direction" /></th>
             <th></th>
         </tr>
     </thead>
@@ -72,8 +72,8 @@
             <td>{{c.name}}</td>
             <td>{{c.documentNumber}}</td>
             <td>
-                <button class="button is-primary is-light" (click)="edit(c.id)">Edit</button>
-                <button class="button is-danger is-light" (click)="showRemoveModal(c.id)">Remove</button>
+                <button class="button edit-button is-primary is-light" (click)="edit(c.id)">Edit</button>
+                <button class="button remove-button is-danger is-light" (click)="showRemoveModal(c.id)">Remove</button>
             </td>
         </tr>       
     </tbody>
