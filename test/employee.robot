@@ -5,6 +5,45 @@ Test Setup      Start Session
 Test Teardown   End Session
 
 *** Test Cases ***
+
+Validate List Employees Layout
+    [Tags]            employee_list
+
+    Go To             ${url}/employees
+    
+    Sleep    1s
+    Page Should Contain Element  css:.employee-title
+
+    Page Should Contain Element  css:.new-employee-button
+    Element Text Should Be       css:.new-employee-button    Create New
+
+    Page Should Contain Element  css:.menu-list    
+
+    Page Should Contain Element  css:.employee-search-form
+    Page Should Contain Element  css:.docnumber-field
+    Page Should Contain Element  css:.name-field    
+    Page Should Contain Element  css:.gender-field
+    Page Should Contain Element  css:.date-from-field
+    Page Should Contain Element  css:.date-to-field
+    Page Should Contain Element  css:.search-employee-button
+    
+    Page Should Contain Element  css:.employee-table
+
+    Page Should Contain Element  css:.id-table-column
+    Element Text Should Be       css:.id-table-column    Id ▲
+
+    Page Should Contain Element  css:.name-table-column
+    Element Text Should Be       css:.name-table-column    Name ▲
+
+    Page Should Contain Element  css:.docnumber-table-column
+    Element Text Should Be       css:.docnumber-table-column    Document Number ▲
+
+    Page Should Contain Element  css:.edit-button
+    Element Text Should Be       css:.edit-button    Edit
+
+    Page Should Contain Element  css:.remove-button
+    Element Text Should Be       css:.remove-button    Remove
+
 Validate Employee Form
     [Tags]                         validate_employee_form
     Go To                          ${url}/employee/new    
@@ -38,6 +77,22 @@ Create Employee Successfully
     Go To                           ${url}/employee/new
     Fill Employee Form                 Joe Doe     42083371844    joe.doe@test.com    10/02/1994    1
     Go To Employee List
+
+Remove Customer Successfully
+    [Tags]                         remove_employee_success
+    Go To                          ${url}/employees
+    Sleep                          1s            
+
+    Click Element                  css:body > app-root > div > div:nth-child(2) > app-employees > table > tbody > tr:nth-child(1) > td:nth-child(4) > button.button.remove-button.is-danger.is-light
+    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the employee bbbb ?
+    Click Element                  css:body > app-root > div > div:nth-child(2) > app-employees > div > div.modal-card > footer > button:nth-child(2)
+
+    Click Element                  css:body > app-root > div > div:nth-child(2) > app-employees > table > tbody > tr:nth-child(1) > td:nth-child(4) > button.button.remove-button.is-danger.is-light
+    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the employee bbbb ?
+    Click Element                  css:body > app-root > div > div:nth-child(2) > app-employees > div > div.modal-card > footer > button.button.is-danger    
+
+    Sleep                          1s
+    Element Text Should Be         css:div[class=message-body]    The employee bbbb was removed successfully!
 
 *** Keywords ***
 Fill Employee Form

@@ -1,4 +1,5 @@
-<h1 class="title">Employees <button class="button is-link" routerLink="/employee/new" routerLinkActive="active">Create New</button></h1>
+<h1 class="title employee-title">Employees <button class="button is-link new-employee-button" routerLink="/employee/new" routerLinkActive="active">Create New</button></h1>
+
 <article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
     <div class="message-body" *ngIf="showSuccess && showRemoveResult">
         The employee <span class="has-text-weight-bold">{{selectedEmployee?.name}}</span> was removed successfully!
@@ -22,11 +23,11 @@
     </div>
 </article>
 
-<form novalidate #form="ngForm" (ngSubmit)="search()">
+<form novalidate #form="ngForm" (ngSubmit)="search()" class="employee-search-form">
   <div class="field is-grouped is-fullwidth">
     <div class="column is-two-fifths" style="padding-left: 0;">
       <div class="field">
-        <label class="label">Document Number</label>
+        <label class="label docnumber-field">Document Number</label>
         <div class="control">
           <input class="input"    
                  #documentNumber="ngModel" 
@@ -39,7 +40,7 @@
       </div>
     </div>  
     <div class="column is-two-fifths" style="padding-left: 0;">
-      <div class="field">
+      <div class="field name-field">
         <label class="label">Name</label>
         <div class="control">
           <input class="input" 
@@ -51,7 +52,7 @@
       </div>
     </div>  
     <div class="column" style="padding-left: 0; padding-right: 0; width: 19%;">
-      <div class="field">
+      <div class="field gender-field">
         <label class="label">Gender</label>
         <div class="control">
             <div class="select is-fullwidth">
@@ -69,7 +70,7 @@
 
 <div class="field is-grouped is-fullwidth">
   <div class="column is-two-fifths" style="padding-left: 0;">
-    <div class="field">
+    <div class="field date-from-field">
       <label class="label">Birth Date From</label>
       <div class="control">
           <input class="input" 
@@ -82,7 +83,7 @@
   </div>  
   <div class="column is-two-fifths" style="padding-left: 0;">
     <div class="field">
-      <div class="field">
+      <div class="field date-to-field">
         <label class="label">Birth Date To</label>
         <div class="control">
             <input class="input" 
@@ -102,16 +103,16 @@
     </div>
   </div>  
   <div class="column" style="padding-left: 0; padding-right: 0; width: 19%; padding-top: 2.6rem;">
-    <button class="button is-link is-fullwidth" type="submit">Search</button>
+    <button class="button is-link is-fullwidth search-employee-button" type="submit">Search</button>
   </div>
 </div>
 
-<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth employee-table">
     <thead>
         <tr>
-            <th (click)="sort('id', 'number')">Id <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('id', 'number')">Name <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('id', 'number')">Document Number <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('id', 'number')" class="id-table-column">Id <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('name')" class="name-table-column">Name <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('documentNumber')" class="docnumber-table-column">Document Number <app-sort-direction [direction]="direction" /></th>
             <th></th>
         </tr>
     </thead>
@@ -121,8 +122,8 @@
             <td>{{e.name}}</td>
             <td>{{e.documentNumber}}</td>
             <td>
-                <button class="button is-primary is-light" (click)="edit(e.id)">Edit</button>
-                <button class="button is-danger is-light" (click)="showRemoveModal(e.id)">Remove</button>
+                <button class="button is-primary is-light edit-button" (click)="edit(e.id)">Edit</button>
+                <button class="button is-danger is-light remove-button" (click)="showRemoveModal(e.id)">Remove</button>
             </td>
         </tr>
     </tbody>

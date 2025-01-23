@@ -1,4 +1,4 @@
-<h1 class="title">Service Order <button class="button is-link" routerLink="/order/new" routerLinkActive="active">Create New</button></h1>
+<h1 class="title order-title">Service Order <button class="button is-link new-order-button" routerLink="/order/new" routerLinkActive="active">Create New</button></h1>
 <article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
   <div class="message-body" *ngIf="showSuccess && showRemoveResult">
       The service order <span class="has-text-weight-bold">{{selectedOrder?.id}}</span> was removed successfully!
@@ -23,10 +23,10 @@
 </article>
 
 
-<form novalidate #form="ngForm" (ngSubmit)="search()">
+<form novalidate #form="ngForm" (ngSubmit)="search()" class="order-search-form">
   <div class="field is-grouped">
     <div class="column is-two-fifths" style="padding-left: 0;">
-        <div class="field">
+        <div class="field customer-field">
             <label class="label">Customer</label>
             <div class="control">
                 <div class="select is-fullwidth">
@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="column is-two-fifths" style="padding-left: 0; padding-right: 0;">
-        <div class="field">
+        <div class="field employee-field">
             <label class="label">Employees</label>
             <div class="control">
                 <div class="select is-fullwidth">                                
@@ -52,21 +52,21 @@
         </div>
     </div>
     <div class="column" style="width: 18%; padding-top: 2.7rem;">
-      <button class="button is-link is-fullwidth" type="submit">Search</button>
+      <button class="button is-link is-fullwidth search-order-button" type="submit">Search</button>
     </div>
   </div>  
 </form>
 
 
-<table class="table  is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+<table class="table order-table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
     <thead>
         <tr>
-            <th (click)="sort('id', 'number')">Id  <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('customer', 'customer')">Customer <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('employee', 'employee')">Employee <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('date', 'date')">Date <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('start', 'time')">Start <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('finish', 'time')">Finish <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('id', 'number')" class="id-table-column">Id  <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('customer', 'customer')" class="customer-table-column">Customer <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('employee', 'employee')" class="employee-table-column">Employee <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('date', 'date')" class="date-table-column">Date <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('start', 'time')" class="start-table-column">Start <app-sort-direction [direction]="direction" /></th>
+            <th (click)="sort('finish', 'time')" class="finish-table-column">Finish <app-sort-direction [direction]="direction" /></th>
             <th></th>
         </tr>
     </thead>
@@ -79,8 +79,8 @@
             <td>{{o.start}}</td>
             <td>{{o.finish}}</td>
             <td>
-                <button class="button is-primary is-light" (click)="edit(o.id)">Edit</button>
-                <button class="button is-danger is-light" (click)="showRemoveModal(o.id)">Remove</button>
+                <button class="button edit-button is-primary is-light" (click)="edit(o.id)">Edit</button>
+                <button class="button remove-button is-danger is-light" (click)="showRemoveModal(o.id)">Remove</button>
             </td>
        </tr>
     </tbody>
