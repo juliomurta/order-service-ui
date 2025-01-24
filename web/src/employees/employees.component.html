@@ -23,7 +23,7 @@
     </div>
 </article>
 
-<form novalidate #form="ngForm" (ngSubmit)="search()" class="employee-search-form">
+<form novalidate #form="ngForm" (ngSubmit)="search(true)" class="employee-search-form">
   <div class="field is-grouped is-fullwidth">
     <div class="column is-two-fifths" style="padding-left: 0;">
       <div class="field">
@@ -66,46 +66,45 @@
       </div>
     </div>
   </div>
-</form>
-
-<div class="field is-grouped is-fullwidth">
-  <div class="column is-two-fifths" style="padding-left: 0;">
-    <div class="field date-from-field">
-      <label class="label">Birth Date From</label>
-      <div class="control">
-          <input class="input" 
-                 type="date" 
-                 #beginBirthDate="ngModel"
-                 name="beginBirthDate"
-                 [(ngModel)]="employeeFilter.beginBirthDate"/>
-      </div>
-    </div>
-  </div>  
-  <div class="column is-two-fifths" style="padding-left: 0;">
-    <div class="field">
-      <div class="field date-to-field">
-        <label class="label">Birth Date To</label>
+  <div class="field is-grouped is-fullwidth">
+    <div class="column is-two-fifths" style="padding-left: 0;">
+      <div class="field date-from-field">
+        <label class="label">Birth Date From</label>
         <div class="control">
             <input class="input" 
-                   type="date"                    
-                   #endBirthDate="ngModel"
-                   name="endBirthDate"                                      
-                   [afterDate]="beginBirthDate"
-                   [(ngModel)]="employeeFilter.endBirthDate"/>
-
-              <div *ngIf="endBirthDate.invalid && (endBirthDate.dirty || endBirthDate.touched)" class="form-error">                            
-                <div *ngIf="endBirthDate.hasError('afterDate')">
-                   Birth Date To must be equal or higher than Birth Date From                
-                </div>
-              </div>
+                  type="date" 
+                  #beginBirthDate="ngModel"
+                  name="beginBirthDate"
+                  [(ngModel)]="employeeFilter.beginBirthDate"/>
         </div>
       </div>
+    </div>  
+    <div class="column is-two-fifths" style="padding-left: 0;">
+      <div class="field">
+        <div class="field date-to-field">
+          <label class="label">Birth Date To</label>
+          <div class="control">
+              <input class="input" 
+                    type="date"                    
+                    #endBirthDate="ngModel"
+                    name="endBirthDate"                                      
+                    [afterDate]="beginBirthDate"
+                    [(ngModel)]="employeeFilter.endBirthDate"/>
+
+                <div *ngIf="endBirthDate.invalid && (endBirthDate.dirty || endBirthDate.touched)" class="form-error">                            
+                  <div *ngIf="endBirthDate.hasError('afterDate')">
+                    Birth Date To must be equal or higher than Birth Date From                
+                  </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+    <div class="column" style="padding-left: 0; padding-right: 0; width: 19%; padding-top: 2.6rem;">
+      <button class="button is-link is-fullwidth search-employee-button" type="submit">Search</button>
     </div>
-  </div>  
-  <div class="column" style="padding-left: 0; padding-right: 0; width: 19%; padding-top: 2.6rem;">
-    <button class="button is-link is-fullwidth search-employee-button" type="submit">Search</button>
   </div>
-</div>
+</form>
 
 <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth employee-table">
     <thead>
@@ -128,26 +127,14 @@
         </tr>
     </tbody>
 </table>
-<!--nav class="pagination is-small" role="navigation" aria-label="pagination">
-    <a href="#" class="pagination-previous">Previous</a>
-    <a href="#" class="pagination-next">Next page</a>
-    <ul class="pagination-list">
-      <li><a href="#" class="pagination-link" aria-label="Goto page 1">1</a></li>
-      <li><span class="pagination-ellipsis">&hellip;</span></li>
-      <li><a href="#" class="pagination-link" aria-label="Goto page 45">45</a></li>
-      <li>
-        <a
-          class="pagination-link is-current"
-          aria-label="Page 46"
-          aria-current="page"
-          >46</a
-        >
-      </li>
-      <li><a href="#" class="pagination-link" aria-label="Goto page 47">47</a></li>
-      <li><span class="pagination-ellipsis">&hellip;</span></li>
-      <li><a href="#" class="pagination-link" aria-label="Goto page 86">86</a></li>
-    </ul>
-  </nav-->
+<button class="button is-medium is-fullwidth employee-showmore-button" (click)="getMoreItems()" [disabled]="loadingResults">
+  @if(loadingResults) { 
+    <span>Loading...</span> 
+  } 
+  @else { 
+    <span>Show More</span> 
+  }
+</button>
   
   <div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
     <div class="modal-background" (click)="toggleModal()"></div>

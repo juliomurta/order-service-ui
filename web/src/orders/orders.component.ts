@@ -20,7 +20,8 @@ import { SortDirection } from '../enum/sort-direction.enum';
 export class OrdersComponent extends BaseComponent {
 
   orderFilter: OrderFilter = new OrderFilter();
-  selectedOrder: Order | undefined;  
+  selectedOrder: Order | undefined;    
+  loadingResults: boolean = false;
   customers: Customer[] = [];
   employees: Employee[] = [];
   orders: Order[] = [];
@@ -35,7 +36,6 @@ export class OrdersComponent extends BaseComponent {
   }
 
   ngOnInit() {
-
     this.customerRepository.getCustomers(new CustomerFilter()).subscribe(result => {
       this.customers = result;
     });
@@ -77,18 +77,30 @@ export class OrdersComponent extends BaseComponent {
     }
   }
 
-  search() {
+  search(searchReset: boolean = false) {
+    if (searchReset) {
+      this.orders = [];
+      this.orderFilter.page = 1;
+    }
+
+    this.loadingResults = true;
     this.orderRepository.getOrders(this.orderFilter).subscribe(result => {
-      this.orders = result;
+      this.orders = this.orders.concat(result);
+      this.loadingResults = false;
     });
+  }
+
+  getMoreItems() {
+    this.orderFilter.page++;
+    this.search();
   }
 
   sort(propertyName: string, type: string = "text") {   
     super.changeSortDirection();
     this.orders.sort((a: any, b: any) => {    
       if (type === "customer") {
-        let value1 = a.customer.name;
-        let value2 = b.customer.name; 
+        let value1 = a.customer.name.toString().toLowerCase();
+        let value2 = b.customer.name.toString().toLowerCase(); 
 
         if (this.direction === SortDirection.Asc) {      
           return value1 > value2 ? 1 : value1  < value2  ? -1 : 0;
@@ -96,8 +108,8 @@ export class OrdersComponent extends BaseComponent {
           return value1 < value2 ? 1 : value1  > value2  ? -1 : 0;
         }
       } else if (type === "employee") {
-        let value1 = a.employee.name;
-        let value2 = b.employee.name; 
+        let value1 = a.employee.name.toString().toLowerCase();
+        let value2 = b.employee.name.toString().toLowerCase(); 
 
         if (this.direction === SortDirection.Asc) {      
           return value1 > value2 ? 1 : value1  < value2  ? -1 : 0;
@@ -121,6 +133,9 @@ export class OrdersComponent extends BaseComponent {
           const hour2 = b[propertyName].split(':');
           value1 = new Date(2000, 1, 1, hour1[0], hour1[1]);
           value2 = new Date(2000, 1, 1, hour2[0], hour2[1]);
+        } else if(type === "text") {
+          value1 = a[propertyName].toString().toLowerCase();
+          value2 = b[propertyName].toString().toLowerCase();
         } else {
           value1 = a[propertyName];
           value2 = b[propertyName];

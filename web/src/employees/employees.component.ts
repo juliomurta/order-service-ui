@@ -17,6 +17,7 @@ export class EmployeesComponent extends BaseComponent {
     employees: Employee[] = [];
     employeeFilter: EmployeeFilter = new EmployeeFilter();
     selectedEmployee: Employee | undefined;
+    loadingResults: boolean = false;
 
     constructor(private employeeRepository: EmployeeRepository,
                 private router: Router,
@@ -51,7 +52,7 @@ export class EmployeesComponent extends BaseComponent {
   
           if (result) {
             this.showSuccess = true;
-            this.search();
+            this.search();  
           } else {
             this.showError = true;
           }
@@ -59,10 +60,22 @@ export class EmployeesComponent extends BaseComponent {
       }
     }
 
-    search() {
+    search(searchReset: boolean = false) {
+      if (searchReset) {
+        this.employees = [];
+        this.employeeFilter.page = 1;
+      }
+  
+      this.loadingResults = true;
       this.employeeRepository.getEmployees(this.employeeFilter).subscribe(result => {
-        this.employees = result;
+        this.employees = this.employees.concat(result); 
+        this.loadingResults = false;
       });
+    }
+
+    getMoreItems() {
+      this.employeeFilter.page++;
+      this.search();
     }
 
     sort(propertyName: string, type: string = "text") {    
@@ -73,6 +86,9 @@ export class EmployeesComponent extends BaseComponent {
         if (type === "number") {
           value1 = parseInt(a[propertyName]);
           value2 = parseInt(b[propertyName]);
+        } else if(type === "text") {
+          value1 = a[propertyName].toString().toLowerCase();
+          value2 = b[propertyName].toString().toLowerCase();
         } else {
           value1 = a[propertyName];
           value2 = b[propertyName];

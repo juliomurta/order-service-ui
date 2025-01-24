@@ -22,7 +22,7 @@ export class CustomerRepository {
         if (filter.documentNumber != '') {
             params = params.append("documentNumber", filter.documentNumber);
         }
-        return this.http.get<Customer[]>(Constants.URL + "/customers", {params});
+        return this.http.get<Customer[]>(Constants.URL + "/customers?_page=" + filter.page, {params});
     }
 
     getCustomer(id: string): Observable<Customer> {

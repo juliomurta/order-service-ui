@@ -27,7 +27,7 @@ export class EmployeeRepository {
             params = params.append("gender", filter.documentNumber);
         }
 
-        return this.http.get<Employee[]>(Constants.URL + "/employees", {params});
+        return this.http.get<Employee[]>(Constants.URL + "/employees?_page=" + filter.page, {params});
     }
 
     getEmployee(id: string): Observable<Employee> {

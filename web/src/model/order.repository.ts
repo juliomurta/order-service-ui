@@ -24,7 +24,7 @@ export class OrderRepository {
         if (filter.customerId != ''){
             params = params.append('employeeId', filter.employeeId);
         }
-        return this.http.get<Order[]>(Constants.URL + "/orders");
+        return this.http.get<Order[]>(Constants.URL + "/orders?_page=" + filter.page, {params});
     }
 
     getOrder(id: string): Observable<Order> {

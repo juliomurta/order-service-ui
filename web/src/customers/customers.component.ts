@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../base.component';
 import { CustomerFilter } from '../filter/customer.filter';
 import { SortDirection } from '../enum/sort-direction.enum';
+import { flush } from '@angular/core/testing';
 
 @Component({
   selector: 'app-customers',
@@ -16,6 +17,7 @@ export class CustomersComponent extends BaseComponent {
   customerFilter: CustomerFilter = new CustomerFilter();
   selectedCustomer: Customer | undefined;  
   customers: Customer[] = [];
+  loadingResults: boolean = false;
 
   constructor(private customerRepository: CustomerRepository,
               private router: Router,
@@ -54,10 +56,23 @@ export class CustomersComponent extends BaseComponent {
     }
   }
 
-  search() {
-    this.customerRepository.getCustomers(this.customerFilter).subscribe(result => {
-      this.customers = result;
+  search(searchReset: boolean = false) {
+    if (searchReset) {
+      this.customers = [];
+      this.customerFilter.page = 1;
+    }
+
+    this.loadingResults = true;
+    this.customerRepository.getCustomers(this.customerFilter)
+    .subscribe(result => {      
+      this.customers = this.customers.concat(result);
+      this.loadingResults = false;
     });
+  }
+
+  getMoreItems() {
+    this.customerFilter.page++;
+    this.search();
   }
 
   sort(propertyName: string, type: string = "text") {    
@@ -68,6 +83,9 @@ export class CustomersComponent extends BaseComponent {
       if (type === "number") {
         value1 = parseInt(a[propertyName]);
         value2 = parseInt(b[propertyName]);
+      } else if(type === "text") {
+        value1 = a[propertyName].toString().toLowerCase();
+        value2 = b[propertyName].toString().toLowerCase();
       } else {
         value1 = a[propertyName];
         value2 = b[propertyName];

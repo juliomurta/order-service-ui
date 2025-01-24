@@ -8,4 +8,5 @@ export class EmployeeFilter {
     public beginBirthDate: Date = new Date();
     public endBirthDate: Date = new Date();
     public gender: Gender = Gender.Unknown;
+    public page: number = 1;
 }

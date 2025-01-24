@@ -4,4 +4,5 @@ import { Injectable } from "@angular/core";
 export class CustomerFilter {
     public name: string = "";
     public documentNumber: string = "";
+    public page: number = 1;
 }
