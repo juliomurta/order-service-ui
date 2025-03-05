@@ -47,7 +47,7 @@ export class EmployeesComponent extends BaseComponent {
     confirmDelete() {
       if (this.selectedEmployee != undefined) {
         this.employeeRepository.removeEmployee(this.selectedEmployee.id).subscribe(result => {        
-          this.toggleModal();
+          super.toggleModal();
           this.showRemoveResult = true;
   
           if (result) {

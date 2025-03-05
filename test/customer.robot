@@ -66,18 +66,20 @@ Create Customer Successfully
 Remove Customer Successfully
     [Tags]                         remove_customer_success
     Go To                          ${url}/customers
-    Sleep                          1s            
+    Sleep                          3s            
 
+    ${remove_username} =    Get Text   css:body > app-root > div > div:nth-child(2) > app-customers > table > tbody > tr:nth-child(1) > td:nth-child(2)
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-customers > table > tbody > tr:nth-child(1) > td:nth-child(4) > button.button.remove-button.is-danger.is-light
-    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the customer fffff editkkkkkk ?
+
+    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the customer ${remove_username} ?
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-customers > div > div.modal-card > footer > button:nth-child(2)
 
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-customers > table > tbody > tr:nth-child(1) > td:nth-child(4) > button.button.remove-button.is-danger.is-light
-    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the customer fffff editkkkkkk ?
+    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the customer ${remove_username} ?
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-customers > div > div.modal-card > footer > button.button.is-danger    
 
-    Sleep                          1s
-    Element Text Should Be         css:div[class=message-body]    The customer fffff editkkkkkk was removed successfully!
+    Sleep                          3s
+    Element Text Should Be         css:div[class=message-body]    The customer ${remove_username} was removed successfully!
 
 *** Keywords ***
 Fill Customer Form

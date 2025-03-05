@@ -44,7 +44,7 @@ export class CustomersComponent extends BaseComponent {
   confirmDelete() {
     if (this.selectedCustomer != undefined) {
       this.customerRepository.removeCustomer(this.selectedCustomer.id).subscribe(result => {        
-        this.toggleModal();
+        super.toggleModal();
         this.showRemoveResult = true;
         if (result) {
           this.showSuccess = true;          

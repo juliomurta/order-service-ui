@@ -78,21 +78,23 @@ Create Employee Successfully
     Fill Employee Form                 Joe Doe     42083371844    joe.doe@test.com    10/02/1994    1
     Go To Employee List
 
-Remove Customer Successfully
+Remove Employee Successfully
     [Tags]                         remove_employee_success
     Go To                          ${url}/employees
     Sleep                          1s            
 
+    ${remove_username} =    Get Text   css:body > app-root > div > div:nth-child(2) > app-employees > table > tbody > tr:nth-child(1) > td:nth-child(2)
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-employees > table > tbody > tr:nth-child(1) > td:nth-child(4) > button.button.remove-button.is-danger.is-light
-    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the employee bbbb ?
+    
+    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the employee ${remove_username} ?
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-employees > div > div.modal-card > footer > button:nth-child(2)
 
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-employees > table > tbody > tr:nth-child(1) > td:nth-child(4) > button.button.remove-button.is-danger.is-light
-    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the employee bbbb ?
+    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the employee ${remove_username} ?
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-employees > div > div.modal-card > footer > button.button.is-danger    
 
     Sleep                          1s
-    Element Text Should Be         css:div[class=message-body]    The employee bbbb was removed successfully!
+    Element Text Should Be         css:div[class=message-body]    The employee ${remove_username} was removed successfully!
 
 *** Keywords ***
 Fill Employee Form
