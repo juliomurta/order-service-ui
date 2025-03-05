@@ -81,6 +81,18 @@ Remove Customer Successfully
     Sleep                          3s
     Element Text Should Be         css:div[class=message-body]    The customer ${remove_username} was removed successfully!
 
+
+Paginate Customer List
+    [Tags]                         paginate_customer_list
+    Go To                          ${url}/customers
+    Sleep                          1s    
+    ${size_before_pagination} =    Get Element Count    css:body > app-root > div > div:nth-child(2) > app-customers > table > tbody > tr    
+    Click Element    css:.customer-showmore-button    
+    Sleep                          3s    
+    ${size_after_pagination} =     Get Element Count    css:body > app-root > div > div:nth-child(2) > app-customers > table > tbody > tr
+    Should Not Be Equal As Integers    ${size_before_pagination}    ${size_after_pagination}
+    Should Be True    ${size_after_pagination} > ${size_before_pagination}
+
 *** Keywords ***
 Fill Customer Form
      [Arguments]                     ${name}       ${documentNumber}    ${email} 

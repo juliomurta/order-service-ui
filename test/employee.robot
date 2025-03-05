@@ -96,6 +96,18 @@ Remove Employee Successfully
     Sleep                          1s
     Element Text Should Be         css:div[class=message-body]    The employee ${remove_username} was removed successfully!
 
+
+Paginate Employee List
+    [Tags]                         paginate_employee_list
+    Go To                          ${url}/employees
+    Sleep                          1s    
+    ${size_before_pagination} =    Get Element Count    css:body > app-root > div > div:nth-child(2) > app-employees > table > tbody > tr    
+    Click Element    css:.employee-showmore-button    
+    Sleep                          3s    
+    ${size_after_pagination} =     Get Element Count    css:body > app-root > div > div:nth-child(2) > app-employees > table > tbody > tr
+    Should Not Be Equal As Integers    ${size_before_pagination}    ${size_after_pagination}
+    Should Be True    ${size_after_pagination} > ${size_before_pagination}
+
 *** Keywords ***
 Fill Employee Form
     [Arguments]                     ${name}       ${documentNumber}    ${email}    ${birthDate}    ${gender}
@@ -111,4 +123,5 @@ Go To Employee List
     [Arguments]    
     Sleep    3s
     Element Text Should Be    css:div[class=message-body]    Employee created successfully!
-    
+
+     
