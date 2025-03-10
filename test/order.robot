@@ -78,18 +78,31 @@ Create Order Successfully
 Remove Order Successfully
     [Tags]                         remove_order_success
     Go To                          ${url}/orders
-    Sleep                          1s            
+    Sleep                          3s            
 
+    ${remove_id} =    Get Text   css:body > app-root > div > div:nth-child(2) > app-orders > table > tbody > tr:nth-child(1) > td:nth-child(2)
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-orders > table > tbody > tr:nth-child(1) > td:nth-child(7) > button.button.remove-button.is-danger.is-light
-    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the service order 1 ?
+    
+    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the service order ${remove_id} ?
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-orders > div > div.modal-card > footer > button:nth-child(2)
 
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-orders > table > tbody > tr:nth-child(1) > td:nth-child(7) > button.button.remove-button.is-danger.is-light
-    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the service order 1 ?
+    Element Text Should Be         css:.modal-card-body    Are you sure you want to remove the service order ${remove_id} ?
     Click Element                  css:body > app-root > div > div:nth-child(2) > app-orders > div > div.modal-card > footer > button.button.is-danger    
 
-    Sleep                          1s
-    Element Text Should Be         css:div[class=message-body]    The service order 1 was removed successfully!
+    Sleep                          3s
+    Element Text Should Be         css:div[class=message-body]    The service order ${remove_id} was removed successfully!
+
+Paginate Order List
+    [Tags]                         paginate_order_list
+    Go To                          ${url}/orders
+    Sleep                          1s    
+    ${size_before_pagination} =    Get Element Count    css:body > app-root > div > div:nth-child(2) > app-orders > table > tbody > tr    
+    Click Element    css:.order-showmore-button    
+    Sleep                          3s    
+    ${size_after_pagination} =     Get Element Count    css:body > app-root > div > div:nth-child(2) > app-orders > table > tbody > tr
+    Should Not Be Equal As Integers    ${size_before_pagination}    ${size_after_pagination}
+    Should Be True    ${size_after_pagination} > ${size_before_pagination}
 
 *** Keywords ***
 Fill Order Form
