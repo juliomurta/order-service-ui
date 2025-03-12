@@ -18,6 +18,7 @@ import { AfterDateDirective } from '../directives/afterDate.directive';
 import { AfterHourDirective } from '../directives/afterHour.directive';
 import { SortDirectionComponent } from '../sort-direction/sort-direction.component';
 import { provideHttpClient } from '@angular/common/http';
+import { MenuComponent } from '../menu/menu.component';
 
 
 
@@ -39,6 +40,7 @@ import { provideHttpClient } from '@angular/common/http';
   declarations: [    
     AfterDateDirective,
     AfterHourDirective,
+    MenuComponent,
     HomeComponent,
     CustomersComponent,
     CustomerFormComponent,

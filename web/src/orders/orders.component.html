@@ -1,109 +1,115 @@
-<h1 class="title order-title">Service Order <button class="button is-link new-order-button" routerLink="/order/new" routerLinkActive="active">Create New</button></h1>
-<article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
-  <div class="message-body" *ngIf="showSuccess && showRemoveResult">
-      The service order <span class="has-text-weight-bold">{{selectedOrder?.id}}</span> was removed successfully!
-  </div>
-  <div class="message-body" *ngIf="showError && showRemoveResult">
-    There were an error while removing the service order <span class="has-text-weight-bold">{{selectedOrder?.id}}.</span>
-  </div>
+<div class="columns">
+  <app-menu></app-menu>
+      <div class="column">
 
-  <div class="message-body" *ngIf="showSuccess && showUpdateResult">
-    Service order updated successfully!
-  </div>
-  <div class="message-body" *ngIf="showError && showUpdateResult">
-    There were an error while updating the service order.
-  </div>
+    <h1 class="title order-title">Service Order <button class="button is-link new-order-button" routerLink="/order/new" routerLinkActive="active">Create New</button></h1>
+    <article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
+      <div class="message-body" *ngIf="showSuccess && showRemoveResult">
+          The service order <span class="has-text-weight-bold">{{selectedOrder?.id}}</span> was removed successfully!
+      </div>
+      <div class="message-body" *ngIf="showError && showRemoveResult">
+        There were an error while removing the service order <span class="has-text-weight-bold">{{selectedOrder?.id}}.</span>
+      </div>
 
-  <div class="message-body" *ngIf="showSuccess && showCreateResult">
-    Service order created successfully!
-  </div>
-  <div class="message-body" *ngIf="showError && showCreateResult">
-    There were an error while creating the service order.
-  </div>
-</article>
+      <div class="message-body" *ngIf="showSuccess && showUpdateResult">
+        Service order updated successfully!
+      </div>
+      <div class="message-body" *ngIf="showError && showUpdateResult">
+        There were an error while updating the service order.
+      </div>
+
+      <div class="message-body" *ngIf="showSuccess && showCreateResult">
+        Service order created successfully!
+      </div>
+      <div class="message-body" *ngIf="showError && showCreateResult">
+        There were an error while creating the service order.
+      </div>
+    </article>
 
 
-<form novalidate #form="ngForm" (ngSubmit)="search(true)" class="order-search-form">
-  <div class="field is-grouped">
-    <div class="column is-two-fifths" style="padding-left: 0;">
-        <div class="field customer-field">
-            <label class="label">Customer</label>
-            <div class="control">
-                <div class="select is-fullwidth">
-                    <select #customer="ngModel" name="customer" [(ngModel)]="orderFilter.customerId">
-                        <option value="" selected>Select an option</option>                      
-                        <option *ngFor="let item of customers" [ngValue]="item.id">{{ item.name }}</option>
-                    </select>
+    <form novalidate #form="ngForm" (ngSubmit)="search(true)" class="order-search-form">
+      <div class="field is-grouped">
+        <div class="column is-two-fifths" style="padding-left: 0;">
+            <div class="field customer-field">
+                <label class="label">Customer</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select #customer="ngModel" name="customer" [(ngModel)]="orderFilter.customerId">
+                            <option value="" selected>Select an option</option>                      
+                            <option *ngFor="let item of customers" [ngValue]="item.id">{{ item.name }}</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="column is-two-fifths" style="padding-left: 0; padding-right: 0;">
-        <div class="field employee-field">
-            <label class="label">Employees</label>
-            <div class="control">
-                <div class="select is-fullwidth">                                
-                    <select #employee="ngModel" name="employee" [(ngModel)]="orderFilter.employeeId">
-                        <option value="" selected>Select an option</option>                      
-                        <option *ngFor="let item of employees" [ngValue]="item.id">{{ item.name }}</option>
-                    </select>
+        <div class="column is-two-fifths" style="padding-left: 0; padding-right: 0;">
+            <div class="field employee-field">
+                <label class="label">Employees</label>
+                <div class="control">
+                    <div class="select is-fullwidth">                                
+                        <select #employee="ngModel" name="employee" [(ngModel)]="orderFilter.employeeId">
+                            <option value="" selected>Select an option</option>                      
+                            <option *ngFor="let item of employees" [ngValue]="item.id">{{ item.name }}</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="column" style="width: 18%; padding-top: 2.7rem;">
+          <button class="button is-link is-fullwidth search-order-button" type="submit">Search</button>
+        </div>
+      </div>  
+    </form>
+    <table class="table order-table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th (click)="sort('id', 'number')" class="id-table-column">Id  <app-sort-direction [direction]="direction" /></th>
+                <th (click)="sort('customer', 'customer')" class="customer-table-column">Customer <app-sort-direction [direction]="direction" /></th>
+                <th (click)="sort('employee', 'employee')" class="employee-table-column">Employee <app-sort-direction [direction]="direction" /></th>
+                <th (click)="sort('date', 'date')" class="date-table-column">Date <app-sort-direction [direction]="direction" /></th>
+                <th (click)="sort('start', 'time')" class="start-table-column">Start <app-sort-direction [direction]="direction" /></th>
+                <th (click)="sort('finish', 'time')" class="finish-table-column">Finish <app-sort-direction [direction]="direction" /></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let o of orders">
+                <td>{{o.id}}</td>
+                <td>{{o.employee.name}}</td>
+                <td>{{o.customer.name}}</td>
+                <td>{{o.date | date: 'dd/MM/yyyy'}}</td>
+                <td>{{o.start}}</td>
+                <td>{{o.finish}}</td>
+                <td>
+                    <button class="button edit-button is-primary is-light" (click)="edit(o.id)">Edit</button>
+                    <button class="button remove-button is-danger is-light" (click)="showRemoveModal(o.id)">Remove</button>
+                </td>
+          </tr>
+        </tbody>
+    </table>
+    <button class="button is-medium is-fullwidth order-showmore-button" (click)="getMoreItems()" [disabled]="loadingResults">
+      @if(loadingResults) { 
+        <span>Loading...</span> 
+      } 
+      @else { 
+        <span>Show More</span> 
+      }
+    </button>
+    <div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
+        <div class="modal-background" (click)="toggleModal()"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Attention!</p>
+            <button class="delete" aria-label="close" (click)="toggleModal()"></button>
+          </header>
+          <section class="modal-card-body">
+            Are you sure you want to remove the service order <span class="has-text-weight-bold">{{ selectedOrder?.id }}</span> ?
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-danger" style="margin-right: 10px;" (click)="confirmDelete()">Yes</button>
+            <button class="button" (click)="toggleModal()">No</button>
+          </footer>
+        </div>
+      </div>
     </div>
-    <div class="column" style="width: 18%; padding-top: 2.7rem;">
-      <button class="button is-link is-fullwidth search-order-button" type="submit">Search</button>
-    </div>
-  </div>  
-</form>
-<table class="table order-table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-    <thead>
-        <tr>
-            <th (click)="sort('id', 'number')" class="id-table-column">Id  <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('customer', 'customer')" class="customer-table-column">Customer <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('employee', 'employee')" class="employee-table-column">Employee <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('date', 'date')" class="date-table-column">Date <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('start', 'time')" class="start-table-column">Start <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('finish', 'time')" class="finish-table-column">Finish <app-sort-direction [direction]="direction" /></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-       <tr *ngFor="let o of orders">
-            <td>{{o.id}}</td>
-            <td>{{o.employee.name}}</td>
-            <td>{{o.customer.name}}</td>
-            <td>{{o.date | date: 'dd/MM/yyyy'}}</td>
-            <td>{{o.start}}</td>
-            <td>{{o.finish}}</td>
-            <td>
-                <button class="button edit-button is-primary is-light" (click)="edit(o.id)">Edit</button>
-                <button class="button remove-button is-danger is-light" (click)="showRemoveModal(o.id)">Remove</button>
-            </td>
-       </tr>
-    </tbody>
-</table>
-<button class="button is-medium is-fullwidth order-showmore-button" (click)="getMoreItems()" [disabled]="loadingResults">
-  @if(loadingResults) { 
-    <span>Loading...</span> 
-  } 
-  @else { 
-    <span>Show More</span> 
-  }
-</button>
-<div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
-    <div class="modal-background" (click)="toggleModal()"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Attention!</p>
-        <button class="delete" aria-label="close" (click)="toggleModal()"></button>
-      </header>
-      <section class="modal-card-body">
-        Are you sure you want to remove the service order <span class="has-text-weight-bold">{{ selectedOrder?.id }}</span> ?
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-danger" style="margin-right: 10px;" (click)="confirmDelete()">Yes</button>
-        <button class="button" (click)="toggleModal()">No</button>
-      </footer>
-    </div>
-  </div>
+</div>

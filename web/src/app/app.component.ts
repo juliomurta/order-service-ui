@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { CoreModule } from '../home/core.module';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',

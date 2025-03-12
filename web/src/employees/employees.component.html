@@ -1,154 +1,158 @@
-<h1 class="title employee-title">Employees <button class="button is-link new-employee-button" routerLink="/employee/new" routerLinkActive="active">Create New</button></h1>
-
-<article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
-    <div class="message-body" *ngIf="showSuccess && showRemoveResult">
-        The employee <span class="has-text-weight-bold">{{selectedEmployee?.name}}</span> was removed successfully!
-    </div>
-    <div class="message-body" *ngIf="showError && showRemoveResult">
-      There were an error while removing the employee <span class="has-text-weight-bold">{{selectedEmployee?.name}}.</span>
-    </div>
-
-    <div class="message-body" *ngIf="showSuccess && showUpdateResult">
-      Employee updated successfully!
-    </div>
-    <div class="message-body" *ngIf="showError && showUpdateResult">
-      There were an error while updating the employee.
-    </div>
-
-    <div class="message-body" *ngIf="showSuccess && showCreateResult">
-      Employee created successfully!
-    </div>
-    <div class="message-body" *ngIf="showError && showCreateResult">
-      There were an error while creating the Employee.
-    </div>
-</article>
-
-<form novalidate #form="ngForm" (ngSubmit)="search(true)" class="employee-search-form">
-  <div class="field is-grouped is-fullwidth">
-    <div class="column is-two-fifths" style="padding-left: 0;">
-      <div class="field">
-        <label class="label docnumber-field">Document Number</label>
-        <div class="control">
-          <input class="input"    
-                 #documentNumber="ngModel" 
-                 name="documentNumber" 
-                 type="text" 
-                 inputmode="numeric"
-                 mask="000.000.000-00" 
-                 [(ngModel)]="employeeFilter.documentNumber"/>
+<div class="columns">
+  <app-menu></app-menu>
+  <div class="column">
+    <h1 class="title employee-title">Employees <button class="button is-link new-employee-button" routerLink="/employee/new" routerLinkActive="active">Create New</button></h1>
+    <article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
+        <div class="message-body" *ngIf="showSuccess && showRemoveResult">
+            The employee <span class="has-text-weight-bold">{{selectedEmployee?.name}}</span> was removed successfully!
         </div>
-      </div>
-    </div>  
-    <div class="column is-two-fifths" style="padding-left: 0;">
-      <div class="field name-field">
-        <label class="label">Name</label>
-        <div class="control">
-          <input class="input" 
-                 #name="ngModel"
-                 name="name"
-                 type="text" 
-                 [(ngModel)]="employeeFilter.name"/>
+        <div class="message-body" *ngIf="showError && showRemoveResult">
+          There were an error while removing the employee <span class="has-text-weight-bold">{{selectedEmployee?.name}}.</span>
         </div>
-      </div>
-    </div>  
-    <div class="column" style="padding-left: 0; padding-right: 0; width: 19%;">
-      <div class="field gender-field">
-        <label class="label">Gender</label>
-        <div class="control">
-            <div class="select is-fullwidth">
-                <select #gender="ngModel" name="gender" [(ngModel)]="employeeFilter.gender">
-                    <option value="" selected="selected">Select an option</option>
-                    <option value="1">Male</option>
-                    <option value="2">Female</option>
-                </select>
+
+        <div class="message-body" *ngIf="showSuccess && showUpdateResult">
+          Employee updated successfully!
+        </div>
+        <div class="message-body" *ngIf="showError && showUpdateResult">
+          There were an error while updating the employee.
+        </div>
+
+        <div class="message-body" *ngIf="showSuccess && showCreateResult">
+          Employee created successfully!
+        </div>
+        <div class="message-body" *ngIf="showError && showCreateResult">
+          There were an error while creating the Employee.
+        </div>
+    </article>
+
+    <form novalidate #form="ngForm" (ngSubmit)="search(true)" class="employee-search-form">
+      <div class="field is-grouped is-fullwidth">
+        <div class="column is-two-fifths" style="padding-left: 0;">
+          <div class="field">
+            <label class="label docnumber-field">Document Number</label>
+            <div class="control">
+              <input class="input"    
+                    #documentNumber="ngModel" 
+                    name="documentNumber" 
+                    type="text" 
+                    inputmode="numeric"
+                    mask="000.000.000-00" 
+                    [(ngModel)]="employeeFilter.documentNumber"/>
             </div>
           </div>
-      </div>
-    </div>
-  </div>
-  <div class="field is-grouped is-fullwidth">
-    <div class="column is-two-fifths" style="padding-left: 0;">
-      <div class="field date-from-field">
-        <label class="label">Birth Date From</label>
-        <div class="control">
-            <input class="input" 
-                  type="date" 
-                  #beginBirthDate="ngModel"
-                  name="beginBirthDate"
-                  [(ngModel)]="employeeFilter.beginBirthDate"/>
-        </div>
-      </div>
-    </div>  
-    <div class="column is-two-fifths" style="padding-left: 0;">
-      <div class="field">
-        <div class="field date-to-field">
-          <label class="label">Birth Date To</label>
-          <div class="control">
+        </div>  
+        <div class="column is-two-fifths" style="padding-left: 0;">
+          <div class="field name-field">
+            <label class="label">Name</label>
+            <div class="control">
               <input class="input" 
-                    type="date"                    
-                    #endBirthDate="ngModel"
-                    name="endBirthDate"                                      
-                    [afterDate]="beginBirthDate"
-                    [(ngModel)]="employeeFilter.endBirthDate"/>
-
-                <div *ngIf="endBirthDate.invalid && (endBirthDate.dirty || endBirthDate.touched)" class="form-error">                            
-                  <div *ngIf="endBirthDate.hasError('afterDate')">
-                    Birth Date To must be equal or higher than Birth Date From                
-                  </div>
+                    #name="ngModel"
+                    name="name"
+                    type="text" 
+                    [(ngModel)]="employeeFilter.name"/>
+            </div>
+          </div>
+        </div>  
+        <div class="column" style="padding-left: 0; padding-right: 0; width: 19%;">
+          <div class="field gender-field">
+            <label class="label">Gender</label>
+            <div class="control">
+                <div class="select is-fullwidth">
+                    <select #gender="ngModel" name="gender" [(ngModel)]="employeeFilter.gender">
+                        <option value="" selected="selected">Select an option</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                    </select>
                 </div>
+              </div>
           </div>
         </div>
       </div>
-    </div>  
-    <div class="column" style="padding-left: 0; padding-right: 0; width: 19%; padding-top: 2.6rem;">
-      <button class="button is-link is-fullwidth search-employee-button" type="submit">Search</button>
-    </div>
-  </div>
-</form>
+      <div class="field is-grouped is-fullwidth">
+        <div class="column is-two-fifths" style="padding-left: 0;">
+          <div class="field date-from-field">
+            <label class="label">Birth Date From</label>
+            <div class="control">
+                <input class="input" 
+                      type="date" 
+                      #beginBirthDate="ngModel"
+                      name="beginBirthDate"
+                      [(ngModel)]="employeeFilter.beginBirthDate"/>
+            </div>
+          </div>
+        </div>  
+        <div class="column is-two-fifths" style="padding-left: 0;">
+          <div class="field">
+            <div class="field date-to-field">
+              <label class="label">Birth Date To</label>
+              <div class="control">
+                  <input class="input" 
+                        type="date"                    
+                        #endBirthDate="ngModel"
+                        name="endBirthDate"                                      
+                        [afterDate]="beginBirthDate"
+                        [(ngModel)]="employeeFilter.endBirthDate"/>
 
-<table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth employee-table">
-    <thead>
-        <tr>
-            <th (click)="sort('id', 'number')" class="id-table-column">Id <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('name')" class="name-table-column">Name <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('documentNumber')" class="docnumber-table-column">Document Number <app-sort-direction [direction]="direction" /></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let e of employees">
-            <td>{{e.id}}</td>
-            <td>{{e.name}}</td>
-            <td>{{e.documentNumber}}</td>
-            <td>
-                <button class="button is-primary is-light edit-button" (click)="edit(e.id)">Edit</button>
-                <button class="button is-danger is-light remove-button" (click)="showRemoveModal(e.id)">Remove</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-<button class="button is-medium is-fullwidth employee-showmore-button" (click)="getMoreItems()" [disabled]="loadingResults">
-  @if(loadingResults) { 
-    <span>Loading...</span> 
-  } 
-  @else { 
-    <span>Show More</span> 
-  }
-</button>
-  
-  <div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
-    <div class="modal-background" (click)="toggleModal()"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Attention!</p>
-        <button class="delete" aria-label="close" (click)="toggleModal()"></button>
-      </header>
-      <section class="modal-card-body">
-        Are you sure you want to remove the employee <span class="has-text-weight-bold">{{ selectedEmployee?.name }}</span> ?
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-danger" style="margin-right: 10px;" (click)="confirmDelete()">Yes</button>
-        <button class="button" (click)="toggleModal()">No</button>
-      </footer>
-    </div>
+                    <div *ngIf="endBirthDate.invalid && (endBirthDate.dirty || endBirthDate.touched)" class="form-error">                            
+                      <div *ngIf="endBirthDate.hasError('afterDate')">
+                        Birth Date To must be equal or higher than Birth Date From                
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+        <div class="column" style="padding-left: 0; padding-right: 0; width: 19%; padding-top: 2.6rem;">
+          <button class="button is-link is-fullwidth search-employee-button" type="submit">Search</button>
+        </div>
+      </div>
+    </form>
+
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth employee-table">
+        <thead>
+            <tr>
+                <th (click)="sort('id', 'number')" class="id-table-column">Id <app-sort-direction [direction]="direction" /></th>
+                <th (click)="sort('name')" class="name-table-column">Name <app-sort-direction [direction]="direction" /></th>
+                <th (click)="sort('documentNumber')" class="docnumber-table-column">Document Number <app-sort-direction [direction]="direction" /></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let e of employees">
+                <td>{{e.id}}</td>
+                <td>{{e.name}}</td>
+                <td>{{e.documentNumber}}</td>
+                <td>
+                    <button class="button is-primary is-light edit-button" (click)="edit(e.id)">Edit</button>
+                    <button class="button is-danger is-light remove-button" (click)="showRemoveModal(e.id)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="button is-medium is-fullwidth employee-showmore-button" (click)="getMoreItems()" [disabled]="loadingResults">
+      @if(loadingResults) { 
+        <span>Loading...</span> 
+      } 
+      @else { 
+        <span>Show More</span> 
+      }
+    </button>
+      
+      <div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
+        <div class="modal-background" (click)="toggleModal()"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Attention!</p>
+            <button class="delete" aria-label="close" (click)="toggleModal()"></button>
+          </header>
+          <section class="modal-card-body">
+            Are you sure you want to remove the employee <span class="has-text-weight-bold">{{ selectedEmployee?.name }}</span> ?
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-danger" style="margin-right: 10px;" (click)="confirmDelete()">Yes</button>
+            <button class="button" (click)="toggleModal()">No</button>
+          </footer>
+        </div>
+      </div>
   </div>
+</div>

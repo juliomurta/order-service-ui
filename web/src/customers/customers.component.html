@@ -1,104 +1,110 @@
-<h1 class="title customer-title">Customers <button class="button is-link new-customer-button" routerLink="/customer/new" routerLinkActive="active">Create New</button></h1>
+<div class="columns">
+  <app-menu></app-menu>
+  <div class="column">
 
-<article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
-    <div class="message-body" *ngIf="showSuccess && showRemoveResult">
-        The customer <span class="has-text-weight-bold">{{selectedCustomer?.name}}</span> was removed successfully!
-    </div>
-    <div class="message-body" *ngIf="showError && showRemoveResult">
-      There were an error while removing the customer <span class="has-text-weight-bold">{{selectedCustomer?.name}}.</span>
-    </div>
+    <h1 class="title customer-title">Customers <button class="button is-link new-customer-button" routerLink="/customer/new" routerLinkActive="active">Create New</button></h1>
 
-    <div class="message-body" *ngIf="showSuccess && showUpdateResult">
-      Customer updated successfully!
-    </div>
-    <div class="message-body" *ngIf="showError && showUpdateResult">
-      There were an error while updating the customer.
-    </div>
+    <article class="message" [ngClass]="{ 'is-primary' : showSuccess, 'is-danger' : showError }">                       
+        <div class="message-body" *ngIf="showSuccess && showRemoveResult">
+            The customer <span class="has-text-weight-bold">{{selectedCustomer?.name}}</span> was removed successfully!
+        </div>
+        <div class="message-body" *ngIf="showError && showRemoveResult">
+          There were an error while removing the customer <span class="has-text-weight-bold">{{selectedCustomer?.name}}.</span>
+        </div>
 
-    <div class="message-body" *ngIf="showSuccess && showCreateResult">
-      Customer created successfully!
-    </div>
-    <div class="message-body" *ngIf="showError && showCreateResult">
-      There were an error while creating the customer.
-    </div>
-</article>
+        <div class="message-body" *ngIf="showSuccess && showUpdateResult">
+          Customer updated successfully!
+        </div>
+        <div class="message-body" *ngIf="showError && showUpdateResult">
+          There were an error while updating the customer.
+        </div>
 
-<form novalidate #form="ngForm" (ngSubmit)="search(true)" class="customer-search-form">
-  <div class="field is-grouped is-fullwidth">
-    <div class="column is-two-fifths" style="padding-left: 0;">
-      <div class="field docnumber-field">
-        <label class="label">Document Number</label>
-        <div class="control">
-          <input class="input"           
-                 #documentNumber="ngModel" 
-                 name="documentNumber" 
-                 type="text" 
-                 inputmode="numeric"
-                 mask="00.000.000/0000-00"
-                 [(ngModel)]="customerFilter.documentNumber" />
+        <div class="message-body" *ngIf="showSuccess && showCreateResult">
+          Customer created successfully!
+        </div>
+        <div class="message-body" *ngIf="showError && showCreateResult">
+          There were an error while creating the customer.
+        </div>
+    </article>
+
+    <form novalidate #form="ngForm" (ngSubmit)="search(true)" class="customer-search-form">
+      <div class="field is-grouped is-fullwidth">
+        <div class="column is-two-fifths" style="padding-left: 0;">
+          <div class="field docnumber-field">
+            <label class="label">Document Number</label>
+            <div class="control">
+              <input class="input"           
+                    #documentNumber="ngModel" 
+                    name="documentNumber" 
+                    type="text" 
+                    inputmode="numeric"
+                    mask="00.000.000/0000-00"
+                    [(ngModel)]="customerFilter.documentNumber" />
+            </div>
+          </div>
+        </div>  
+        <div class="column is-two-fifths">
+          <div class="field name-field">
+            <label class="label">Name</label>
+            <div class="control">
+              <input class="input" 
+                    type="text" 
+                    #name="ngModel"
+                    name="name"
+                    [(ngModel)]="customerFilter.name"/>
+            </div>
+          </div>
+        </div>  
+        <div class="column" style="width: 19%; padding-top: 2.7rem; padding-left: 0; padding-right: 0; ">
+          <button class="button is-link is-fullwidth search-customer-button" type="submit">Search</button>
         </div>
       </div>
-    </div>  
-    <div class="column is-two-fifths">
-      <div class="field name-field">
-        <label class="label">Name</label>
-        <div class="control">
-          <input class="input" 
-                 type="text" 
-                 #name="ngModel"
-                 name="name"
-                 [(ngModel)]="customerFilter.name"/>
+    </form>
+
+    <table class="table customer-table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th (click)="sort('id', 'number')" class="id-table-column">Id <app-sort-direction [direction]="direction" /></th>
+                <th (click)="sort('name')" class="name-table-column">Name <app-sort-direction [direction]="direction" /></th>
+                <th (click)="sort('documentNumber')" class="docnumber-table-column">Document Number <app-sort-direction [direction]="direction" /></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of customers">
+                <td>{{c.id}}</td>
+                <td>{{c.name}}</td>
+                <td>{{c.documentNumber}}</td>
+                <td>
+                    <button class="button edit-button is-primary is-light" (click)="edit(c.id)">Edit</button>
+                    <button class="button remove-button is-danger is-light" (click)="showRemoveModal(c.id)">Remove</button>
+                </td>
+            </tr>       
+        </tbody>
+    </table>
+    <button class="button is-medium is-fullwidth customer-showmore-button" (click)="getMoreItems()" [disabled]="loadingResults">
+      @if(loadingResults) { 
+        <span>Loading...</span> 
+      } 
+      @else { 
+        <span>Show More</span> 
+      }
+    </button>
+    <div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
+        <div class="modal-background" (click)="toggleModal()"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Attention!</p>
+            <button class="delete" aria-label="close" (click)="toggleModal()"></button>
+          </header>
+          <section class="modal-card-body">
+            Are you sure you want to remove the customer <span class="has-text-weight-bold">{{ selectedCustomer?.name }}</span> ?
+          </section>
+          <footer class="modal-card-foot">
+            <button class="button is-danger" style="margin-right: 10px;" (click)="confirmDelete()">Yes</button>
+            <button class="button" (click)="toggleModal()">No</button>
+          </footer>
         </div>
       </div>
-    </div>  
-    <div class="column" style="width: 19%; padding-top: 2.7rem; padding-left: 0; padding-right: 0; ">
-      <button class="button is-link is-fullwidth search-customer-button" type="submit">Search</button>
-    </div>
   </div>
-</form>
-
-<table class="table customer-table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-    <thead>
-        <tr>
-            <th (click)="sort('id', 'number')" class="id-table-column">Id <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('name')" class="name-table-column">Name <app-sort-direction [direction]="direction" /></th>
-            <th (click)="sort('documentNumber')" class="docnumber-table-column">Document Number <app-sort-direction [direction]="direction" /></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let c of customers">
-            <td>{{c.id}}</td>
-            <td>{{c.name}}</td>
-            <td>{{c.documentNumber}}</td>
-            <td>
-                <button class="button edit-button is-primary is-light" (click)="edit(c.id)">Edit</button>
-                <button class="button remove-button is-danger is-light" (click)="showRemoveModal(c.id)">Remove</button>
-            </td>
-        </tr>       
-    </tbody>
-</table>
-<button class="button is-medium is-fullwidth customer-showmore-button" (click)="getMoreItems()" [disabled]="loadingResults">
-  @if(loadingResults) { 
-    <span>Loading...</span> 
-  } 
-  @else { 
-    <span>Show More</span> 
-  }
-</button>
-<div class="modal" [ngClass]="{ 'is-active' : isModalActive }">
-    <div class="modal-background" (click)="toggleModal()"></div>
-    <div class="modal-card">
-      <header class="modal-card-head">
-        <p class="modal-card-title">Attention!</p>
-        <button class="delete" aria-label="close" (click)="toggleModal()"></button>
-      </header>
-      <section class="modal-card-body">
-        Are you sure you want to remove the customer <span class="has-text-weight-bold">{{ selectedCustomer?.name }}</span> ?
-      </section>
-      <footer class="modal-card-foot">
-        <button class="button is-danger" style="margin-right: 10px;" (click)="confirmDelete()">Yes</button>
-        <button class="button" (click)="toggleModal()">No</button>
-      </footer>
-    </div>
-  </div>
+</div>
