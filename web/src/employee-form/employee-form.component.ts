@@ -4,6 +4,7 @@ import { EmployeeRepository } from '../model/employee.repository';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { FormBaseComponent } from '../form-base.component';
+import { EmployeeDocument } from '../model/document.model';
 
 @Component({
   selector: 'app-employee-form',
@@ -14,6 +15,10 @@ export class EmployeeFormComponent extends FormBaseComponent {
 
   employee: Employee = new Employee();
   editing: boolean = false;
+
+  employeeDocuments: EmployeeDocument[] = [];
+  showGeneralTab: boolean = true;
+  showDocumentsTab: boolean = false;
 
   constructor(private employeeRepository: EmployeeRepository,
               private router: Router,
@@ -48,5 +53,11 @@ export class EmployeeFormComponent extends FormBaseComponent {
     } else {
       super.checkFormValidation(form);
     }
+  }
+
+  toggleTabs() {
+    debugger;
+    this.showGeneralTab = !this.showGeneralTab;
+    this.showDocumentsTab = !this.showDocumentsTab;
   }
 }

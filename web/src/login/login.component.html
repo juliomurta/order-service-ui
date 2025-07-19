@@ -1,17 +1,44 @@
+<article class="message" [ngClass]="{'is-danger' : showError }">                       
+    <div class="message-body" *ngIf="showError">
+            {{messageError}}
+    </div>
+</article>
 <article class="panel is-info">
     <p class="panel-heading">Login</p>
-    <div class="panel-block">        
-        <form novalidate>
+    <div class="panel-block">               
+        <form novalidate #form="ngForm" (ngSubmit)="doLogin(form)">
             <div class="field">
                 <label class="label">Username</label>
                 <div class="control">
-                    <input class="input is-info" type="text" />
+                    <input class="input is-info"
+                           #username="ngModel" 
+                           type="text"
+                           name="username"
+                           required
+                           [(ngModel)]="login.username" />
+
+                     <div *ngIf="username.invalid && (username.dirty || username.touched)" class="username-error form-error">
+                        <div *ngIf="username.hasError('required')">
+                            Username is required.
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="field">
                 <label class="label">Password</label>
                 <div class="control">
-                    <input class="input is-info" type="password" />
+                    <input class="input is-info" 
+                           #password="ngModel"
+                           name="password"
+                           required
+                           [(ngModel)]="login.password"
+                           type="password" />
+
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="password-error form-error">
+                        <div *ngIf="password.hasError('required')">
+                            Password is required.
+                        </div>
+                    </div>
                 </div>
             </div>            
             <button class="button is-link" type="submit">Send</button>

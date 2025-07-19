@@ -1,94 +1,103 @@
+<app-header></app-header>
 <div class="columns">    
     <app-menu></app-menu>
     <div class="column is-three-quarters">
-        <h1 class="title">Employees</h1>        
-        <form novalidate #form="ngForm" (ngSubmit)="save(form)">
-            <div class="field">
-                <label class="label">Name</label>
-                <div class="control">
-                    <input class="input" 
-                        type="text" 
-                        #name="ngModel" 
-                        name="name"                         
-                        required 
-                        minlength="3"
-                        maxlength="30"
-                        [(ngModel)]="employee.name" />
+        <h1 class="title">Employees</h1>      
+        
+        <div class="tabs">
+            <ul>
+                <li (click)="toggleTabs()" [ngClass]="{ 'is-active' : showGeneralTab }"><a>General</a></li>
+                <li (click)="toggleTabs()" [ngClass]="{ 'is-active' : showDocumentsTab }"><a>Documents</a></li>
+            </ul>
+        </div>
+        <div class="general-tab" *ngIf="showGeneralTab">
+            <form novalidate #form="ngForm" (ngSubmit)="save(form)">
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" 
+                            type="text" 
+                            #name="ngModel" 
+                            name="name"                         
+                            required 
+                            minlength="3"
+                            maxlength="30"
+                            [(ngModel)]="employee.name" />
 
-                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="name-error form-error">
-                        <div *ngIf="name.hasError('required')">
-                          Name is required.
-                        </div>
-                        <div *ngIf="name.hasError('minlength')">
-                            Name min length is 3.
-                        </div>
-                        <div *ngIf="name.hasError('maxlength')">
-                            Name max length is 30.
+                        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="name-error form-error">
+                            <div *ngIf="name.hasError('required')">
+                            Name is required.
+                            </div>
+                            <div *ngIf="name.hasError('minlength')">
+                                Name min length is 3.
+                            </div>
+                            <div *ngIf="name.hasError('maxlength')">
+                                Name max length is 30.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="field">
-                <label class="label">Document Number</label>
-                <div class="control">
-                    <input class="input" 
-                        type="text" 
-                        #documentNumber="ngModel"
-                        name="documentNumber"  
-                        required                      
-                        minlength="11"
-                        inputmode="numeric"
-                        mask="000.000.000-00"
-                        [(ngModel)]="employee.documentNumber"/>
+                <div class="field">
+                    <label class="label">Document Number</label>
+                    <div class="control">
+                        <input class="input" 
+                            type="text" 
+                            #documentNumber="ngModel"
+                            name="documentNumber"  
+                            required                      
+                            minlength="11"
+                            inputmode="numeric"
+                            mask="000.000.000-00"
+                            [(ngModel)]="employee.documentNumber"/>
 
-                    <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="docnumber-error form-error">                            
-                        <div *ngIf="documentNumber.hasError('required')">
-                            Document Number is required.                
-                        </div>
-                        <div *ngIf="documentNumber.hasError('minlength')">
-                           Document Number should have 14 characters
+                        <div *ngIf="documentNumber.invalid && (documentNumber.dirty || documentNumber.touched)" class="docnumber-error form-error">                            
+                            <div *ngIf="documentNumber.hasError('required')">
+                                Document Number is required.                
+                            </div>
+                            <div *ngIf="documentNumber.hasError('minlength')">
+                            Document Number should have 14 characters
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="field">
-                <label class="label">Email</label>
-                <div class="control has-icons-left has-icons-right">
-                    <input class="input"
-                        type="email"
-                        #email="ngModel"
-                        name="email"
-                        required
-                        email
-                        [(ngModel)]="employee.email" />
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input"
+                            type="email"
+                            #email="ngModel"
+                            name="email"
+                            required
+                            email
+                            [(ngModel)]="employee.email" />
 
-                    <span class="icon is-small is-left">
-                        <i class="fas fa-envelope"></i>
-                    </span>
-                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="email-error form-error">
-                        <div *ngIf="email.hasError('required')">
-                            Email is required.
-                        </div>
-                        <div *ngIf="email.hasError('email')">
-                           The input must be a valid email.
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="email-error form-error">
+                            <div *ngIf="email.hasError('required')">
+                                Email is required.
+                            </div>
+                            <div *ngIf="email.hasError('email')">
+                                The input must be a valid email.
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="field is-grouped">
-                <div class="column is-half" style="padding-left: 0;">
-                    <div class="field">
-                        <label class="label">Birth Date</label>
-                        <div class="control">
-                            <input class="input"
-                                type="date"
-                                #birthDate="ngModel"
-                                name="birthDate"
-                                required
-                                [(ngModel)]="employee.birthDate" />
+                <div class="field is-grouped">
+                    <div class="column is-half" style="padding-left: 0;">
+                        <div class="field">
+                            <label class="label">Birth Date</label>
+                            <div class="control">
+                                <input class="input"
+                                    type="date"
+                                    #birthDate="ngModel"
+                                    name="birthDate"
+                                    required
+                                    [(ngModel)]="employee.birthDate" />
 
-                            <div *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="birthdate-error form-error">
-                                <div *ngIf="birthDate.hasError('required')">
+                                <div *ngIf="birthDate.invalid && (birthDate.dirty || birthDate.touched)" class="birthdate-error form-error">
+                                    <div *ngIf="birthDate.hasError('required')">
                                     Birth Date is required.
                                 </div>
                             </div>
@@ -107,23 +116,46 @@
                                 </select>
                                 <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="gender-error form-error">
                                     <div *ngIf="gender.hasError('required')">
-                                        Gender is required.
+                                            Gender is required.
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="field is-grouped">
-                <div class="control">
-                    <button class="button is-link" type="submit">Submit</button>
-                </div>
-                <div class="control">
-                    <button class="button is-link is-light" 
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link" type="submit">Submit</button>
+                    </div>
+                    <div class="control">
+                        <button class="button is-link is-light" 
                             routerLink="/employees">Cancel</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div class="documents-tab" *ngIf="showDocumentsTab">
+            <header>
+                <h2 class="subtitle is-3" style="margin-bottom: 20px;">Documents</h2>
+            </header>
+            <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth employee-table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngIf="!employeeDocuments || employeeDocuments.length === 0">
+                        <td colspan="2">No documents found.</td>
+                    </tr>
+                    <tr *ngFor="let document of employeeDocuments">
+                        <td>{{document.id}}</td>
+                        <td>{{document.name}}</td>
+                    </tr>
+                </tbody>
+            </table>               
+        </div>
     </div>
 </div>

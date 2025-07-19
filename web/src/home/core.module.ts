@@ -6,7 +6,6 @@ import { OrdersComponent } from '../orders/orders.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CustomersComponent } from '../customers/customers.component';
-import { StaticDataSource } from '../model/static.datasource';
 import { CustomerRepository } from '../model/customer.repository';
 import { EmployeeRepository } from '../model/employee.repository';
 import { OrderRepository } from '../model/order.repository';
@@ -17,8 +16,12 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { AfterDateDirective } from '../directives/afterDate.directive';
 import { AfterHourDirective } from '../directives/afterHour.directive';
 import { SortDirectionComponent } from '../sort-direction/sort-direction.component';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { MenuComponent } from '../menu/menu.component';
+import { LoginComponent } from '../login/login.component';
+import { LoginService } from '../model/login.service';
+import { HeaderComponent } from '../header/header.component';
+import { HealthCheckService } from '../model/health-check.service';
 
 
 
@@ -30,10 +33,11 @@ import { MenuComponent } from '../menu/menu.component';
     NgxMaskDirective
   ],
   providers: [
+    LoginService,
+    HealthCheckService,
     CustomerRepository,
     EmployeeRepository,
     OrderRepository,
-    StaticDataSource,
     provideNgxMask(),
     provideHttpClient()
   ],
@@ -48,7 +52,9 @@ import { MenuComponent } from '../menu/menu.component';
     EmployeeFormComponent,
     OrdersComponent,
     OrderFormComponent,
-    SortDirectionComponent
+    SortDirectionComponent,
+    LoginComponent,
+    HeaderComponent
   ]
 })
 export class CoreModule { }
