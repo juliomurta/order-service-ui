@@ -17,7 +17,7 @@ export class EmployeeFormComponent extends FormBaseComponent {
   editing: boolean = false;
 
   employeeDocuments: EmployeeDocument[] = [];
-  showGeneralTab: boolean = true;
+  showGeneralTab: boolean = false;
   showDocumentsTab: boolean = false;
 
   constructor(private employeeRepository: EmployeeRepository,
@@ -25,6 +25,7 @@ export class EmployeeFormComponent extends FormBaseComponent {
               activateRoute: ActivatedRoute
   ) { 
     super();
+    this.selectGeneralTab();
     const id = activateRoute.snapshot.params["id"];
     if(id) {
       this.employeeRepository.getEmployee(id)
@@ -55,9 +56,13 @@ export class EmployeeFormComponent extends FormBaseComponent {
     }
   }
 
-  toggleTabs() {
-    debugger;
-    this.showGeneralTab = !this.showGeneralTab;
-    this.showDocumentsTab = !this.showDocumentsTab;
+  selectGeneralTab() {
+    this.showGeneralTab = true;
+    this.showDocumentsTab = false;
+  }
+
+  selectDocsTab() {
+    this.showGeneralTab = false;
+    this.showDocumentsTab = true;
   }
 }

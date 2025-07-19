@@ -6,8 +6,8 @@
         
         <div class="tabs">
             <ul>
-                <li (click)="toggleTabs()" [ngClass]="{ 'is-active' : showGeneralTab }"><a>General</a></li>
-                <li (click)="toggleTabs()" [ngClass]="{ 'is-active' : showDocumentsTab }"><a>Documents</a></li>
+                <li (click)="selectGeneralTab()" [ngClass]="{ 'is-active' : showGeneralTab }"><a>General</a></li>
+                <li (click)="selectDocsTab()" [ngClass]="{ 'is-active' : showDocumentsTab }"><a>Documents</a></li>
             </ul>
         </div>
         <div class="general-tab" *ngIf="showGeneralTab">
