@@ -4,7 +4,6 @@ import { Employee } from '../model/employee.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BaseComponent } from '../base.component';
 import { EmployeeFilter } from '../filter/employee.filter';
-import { NgForm } from '@angular/forms';
 import { SortDirection } from '../enum/sort-direction.enum';
 
 @Component({
@@ -74,6 +73,7 @@ export class EmployeesComponent extends BaseComponent {
     }
 
     getMoreItems() {
+      debugger;
       this.employeeFilter.page++;
       this.search();
     }

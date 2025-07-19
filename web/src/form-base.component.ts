@@ -1,6 +1,6 @@
 import { NgForm } from "@angular/forms";
 
-export class FormBaseComponent {
+export class  FormBaseComponent{
     checkFormValidation(form: NgForm) {
         Object.keys(form.controls).forEach(key => {
             const control = form.controls[key];
